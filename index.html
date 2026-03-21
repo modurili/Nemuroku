@@ -739,13 +739,11 @@ a:hover{text-decoration:underline;}
       <div class="my-sec">
         <div class="my-st">データ管理</div>
         <div class="my-row tap" onclick="exportCSV()"><span>CSVエクスポート</span><span style="font-size:16px;color:var(--txt2)">›</span></div>
-        <div class="my-row tap">
+        <div class="my-row tap" onclick="triggerCSVImport()">
           <span>CSVインポート</span>
-          <label class="import-file-btn">
-            📂 ファイルを選択
-            <input type="file" accept=".csv" id="csvImportInput" style="display:none" onchange="importCSV(this)">
-          </label>
+          <span style="font-size:13px;color:var(--txt2)">📂 選択</span>
         </div>
+        <input type="file" accept=".csv,text/csv,text/plain,application/csv" id="csvImportInput" style="position:fixed;top:-999px;left:-999px;opacity:0;width:1px;height:1px;" onchange="importCSV(this)">
         <div class="my-row tap danger" onclick="confirmClearAll()"><span>すべての記録を削除</span><span style="font-size:16px">›</span></div>
       </div>
     </div>
@@ -1778,11 +1776,12 @@ function exportCSV(){
   URL.revokeObjectURL(url); toast('📥 CSVをダウンロードしました');
 }
 
-/* ══ CSV IMPORT ══
-   Accepts the exported CSV format:
-   date,bedtime,waketime,duration_min,duration_hm
-   Reconstructs sleep + wake record pairs from bedtime/waketime columns.
-*/
+/* ══ CSV IMPORT ══ */
+function triggerCSVImport(){
+  const input = document.getElementById('csvImportInput');
+  input.value = '';
+  input.click();
+}
 function importCSV(input){
   const file = input.files[0];
   if(!file){ return; }
@@ -1844,8 +1843,6 @@ function importCSV(input){
     } catch(err){
       toast('⚠️ インポートに失敗しました: '+err.message);
     }
-    // Reset input so same file can be re-imported
-    input.value='';
   };
   reader.readAsText(file);
 }
