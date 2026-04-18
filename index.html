@@ -44,9 +44,9 @@
   --shadow:0 4px 16px rgba(45,45,45,.1);--sh3:0 1px 4px rgba(45,45,45,.06);
   --surf:#ffffff;--surf2:#f5f5f5;--surf3:#f0f0f0;--surf4:#ebebeb;
   --bord:#e9e9e9;--bord2:#e0e0e0;--txt:#2d2d2d;--txt2:#646464;--txt3:#a5a5a5;
-  --indigo:#4a72c0;--indigo-g:linear-gradient(135deg,#4a72c0,#7050c0);
-  --indigo-s:rgba(74,114,192,.09);--indigo-d:rgba(74,114,192,.05);
-  --amber:#b88030;--amber-s:rgba(184,128,48,.09);--amber-d:rgba(184,128,48,.05);
+  --indigo:#3d6dd4;--indigo-g:linear-gradient(135deg,#3d6dd4,#6a48d4);
+  --indigo-s:rgba(61,109,212,.12);--indigo-d:rgba(61,109,212,.06);
+  --amber:#c07818;--amber-s:rgba(192,120,24,.12);--amber-d:rgba(192,120,24,.06);
   --violet:#7040c0;--violet-s:rgba(112,64,192,.09);
   --mint:#3da66e;--mint-s:rgba(61,166,110,.09);
   --rose:#d93c3c;--rose-s:rgba(217,60,60,.09);
@@ -80,7 +80,7 @@ a{color:var(--accent);text-decoration:none;}
 .dash-top-right{display:flex;gap:6px;align-items:center;}
 .th-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--border2);background:var(--bg2);color:var(--text3);font-size:15px;display:flex;align-items:center;justify-content:center;transition:all .15s;}
 .th-btn:active{transform:scale(.9);background:var(--bg3);}
-.install-btn{display:none;align-items:center;gap:5px;padding:5px 11px;border-radius:20px;background:rgba(91,184,138,.08);border:1px solid rgba(91,184,138,.3);color:var(--accent);font-size:11px;font-family:'Syne',sans-serif;font-weight:700;}
+.install-btn{display:none;align-items:center;gap:5px;padding:5px 11px;border-radius:20px;background:color-mix(in srgb,var(--accent) 10%,transparent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);color:var(--accent);font-size:11px;font-family:'Syne',sans-serif;font-weight:700;}
 .install-btn.show{display:flex;}
 /* DASHBOARD */
 #pg-dash{display:flex;flex-direction:column;height:100%;overflow:hidden;}
@@ -104,7 +104,7 @@ a{color:var(--accent);text-decoration:none;}
 .st-sub{font-size:11px;color:var(--text2);}
 .st-tips{margin-top:8px;padding:7px 10px;background:var(--bg3);border-radius:10px;border-left:3px solid var(--accent);display:none;align-items:flex-start;gap:7px;}
 .st-tips.show{display:flex;}
-.tips-ic{font-size:12px;flex-shrink:0;margin-top:1px;}
+.tips-ic{flex-shrink:0;margin-top:1px;display:flex;align-items:center;color:var(--accent);}
 .tips-txt{font-size:11px;color:var(--text2);line-height:1.6;}
 .d-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:6px 14px 0;flex-shrink:0;}
 .st-c{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rs);padding:9px 6px;text-align:center;}
@@ -135,14 +135,14 @@ a{color:var(--accent);text-decoration:none;}
 .d-acts-full{padding:4px 14px 8px;flex-shrink:0;}
 .a-btn{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rs);padding:10px 13px;display:flex;flex-direction:row;align-items:center;gap:8px;transition:all .15s;text-align:left;}
 .a-btn:active{transform:scale(.96);}
-.a-btn.sab{border-color:rgba(107,143,212,.28);}
+.a-btn.sab{border-color:rgba(107,143,212,.28);}.a-btn.sab .ab-ic{color:var(--indigo);}.a-btn.wab .ab-ic{color:var(--amber);}.a-btn.vab .ab-ic{color:var(--accent);}
 .a-btn.sab:active{background:var(--indigo-d);}
 .a-btn.wab{border-color:rgba(212,160,80,.28);}
 .a-btn.wab:active{background:var(--amber-d);}
-.a-btn.vab{border-color:rgba(91,184,138,.22);width:100%;}
-.a-btn.vab:active{background:rgba(91,184,138,.06);}
+.a-btn.vab{border-color:color-mix(in srgb,var(--accent) 25%,transparent);width:100%;}
+.a-btn.vab:active{background:color-mix(in srgb,var(--accent) 7%,transparent);}
 .a-btn.dis{opacity:.3;pointer-events:none;}
-.ab-ic{font-size:18px;flex-shrink:0;}
+.ab-ic{font-size:18px;flex-shrink:0;display:flex;align-items:center;justify-content:center;width:24px;height:24px;}
 .ab-body{display:flex;flex-direction:column;gap:1px;}
 .ab-lb{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);}
 .ab-ti{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--text);}
@@ -158,7 +158,7 @@ a{color:var(--accent);text-decoration:none;}
 .rec-pg-btn{width:30px;height:30px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text2);transition:all .15s;font-family:'DM Mono',monospace;}
 .rec-pg-btn:active{background:var(--bg3);color:var(--text);}
 .rec-pg-btn:disabled{opacity:.28;pointer-events:none;}
-.rec-pg-btn.cur{background:rgba(91,184,138,.1);border-color:rgba(91,184,138,.35);color:var(--accent);font-weight:700;}
+.rec-pg-btn.cur{background:color-mix(in srgb,var(--accent) 11%,transparent);border-color:color-mix(in srgb,var(--accent) 38%,transparent);color:var(--accent);font-weight:700;}
 .rec-dg-hd{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);padding:10px 2px 5px;}
 .rec-dg-hd:first-child{padding-top:2px;}
 @keyframes popUp{from{opacity:0;transform:scale(.96) translateY(4px)}to{opacity:1;transform:scale(1) translateY(0)}}
@@ -174,18 +174,18 @@ a{color:var(--accent);text-decoration:none;}
 .stime{font-family:'DM Mono',monospace;font-size:16px;font-weight:500;color:var(--text);}
 .sac{display:flex;gap:4px;}
 .sib{width:30px;height:30px;border-radius:50%;border:1px solid var(--border);background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text2);transition:all .15s;}
-.sib.ed:active{color:var(--accent);border-color:rgba(91,184,138,.4);background:rgba(91,184,138,.08);}
+.sib.ed:active{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 42%,transparent);background:color-mix(in srgb,var(--accent) 9%,transparent);}
 .sib.dl:active{color:var(--del);border-color:rgba(255,92,92,.3);background:rgba(255,92,92,.06);}
 .sib:active{transform:scale(.88);}
 .sess-connector{display:flex;align-items:center;gap:10px;padding:0 13px;}
 .conn-line-wrap{display:flex;flex-direction:column;align-items:center;width:8px;flex-shrink:0;}
 .conn-line{width:1px;height:14px;background:var(--border2);}
 .conn-dur-row{flex:1;display:flex;align-items:center;gap:8px;padding:3px 0;}
-.conn-dur{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);background:rgba(91,184,138,.1);border:1px solid rgba(91,184,138,.2);padding:2px 10px;border-radius:10px;}
+.conn-dur{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);background:color-mix(in srgb,var(--accent) 11%,transparent);border:1px solid color-mix(in srgb,var(--accent) 22%,transparent);padding:2px 10px;border-radius:10px;}
 .conn-dur-line{flex:1;height:1px;background:var(--border);}
 .orphan-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rs);display:flex;align-items:center;gap:10px;padding:11px 13px;margin-bottom:8px;animation:popUp .2s cubic-bezier(.34,1.56,.64,1);}
 /* FAB — fixed position above pager */
-.fab{position:absolute;bottom:72px;right:16px;width:50px;height:50px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;box-shadow:0 4px 20px rgba(91,184,138,.4);transition:all .2s;z-index:6;}
+.fab{position:absolute;bottom:72px;right:16px;width:50px;height:50px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;box-shadow:0 4px 20px color-mix(in srgb,var(--accent) 45%,transparent);transition:all .2s;z-index:6;}
 .fab:active{transform:scale(.94);}
 .empty{text-align:center;padding:56px 24px;color:var(--text2);font-size:13px;line-height:1.8;}
 /* REPORT */
@@ -255,7 +255,7 @@ a{color:var(--accent);text-decoration:none;}
 .my-row.tap:active{background:var(--bg3);}
 .my-row.danger{color:var(--del);}
 .tog{width:44px;height:25px;border-radius:13px;background:var(--bg4);border:1px solid var(--border2);cursor:pointer;position:relative;padding:0;flex-shrink:0;transition:background .2s,border-color .2s;}
-.tog.on{background:rgba(91,184,138,.15);border-color:rgba(91,184,138,.4);}
+.tog.on{background:color-mix(in srgb,var(--accent) 18%,transparent);border-color:color-mix(in srgb,var(--accent) 45%,transparent);}
 .tog-k{position:absolute;top:2px;left:2px;width:19px;height:19px;border-radius:50%;background:var(--text3);transition:transform .22s cubic-bezier(.34,1.56,.64,1),background .2s;box-shadow:0 1px 3px rgba(0,0,0,.35);}
 .tog.on .tog-k{transform:translateX(19px);background:var(--accent);}
 /* ACCENT PICKER */
@@ -273,7 +273,7 @@ a{color:var(--accent);text-decoration:none;}
 /* OVERLAY & DRAWERS */
 .ov{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .25s;}
 .ov.open{opacity:1;pointer-events:auto;}
-.dr{position:fixed;bottom:0;left:50%;transform:translate(-50%,100%);width:100%;max-width:480px;background:var(--bg2);border-radius:20px 20px 0 0;border-top:1px solid var(--border2);z-index:51;transition:transform .3s cubic-bezier(.32,1,.32,1),visibility 0s .3s;box-shadow:0 -8px 32px rgba(0,0,0,.5);padding-bottom:max(16px,env(safe-area-inset-bottom));visibility:hidden;}
+.dr{position:fixed;bottom:0;left:50%;transform:translate(-50%,100%);width:100%;max-width:480px;background:var(--bg2);border-radius:20px 20px 0 0;border-top:1px solid var(--border2);z-index:51;transition:transform .3s cubic-bezier(.32,1,.32,1),visibility 0s .3s;box-shadow:var(--shadow);padding-bottom:max(16px,env(safe-area-inset-bottom));visibility:hidden;}
 .dr.open{transform:translate(-50%,0);visibility:visible;transition:transform .3s cubic-bezier(.32,1,.32,1),visibility 0s 0s;}
 .dr-handle{width:36px;height:4px;border-radius:2px;background:var(--border2);margin:11px auto 12px;}
 .dr-ti{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;text-align:center;color:var(--text);margin-bottom:12px;}
@@ -283,7 +283,7 @@ a{color:var(--accent);text-decoration:none;}
 .drtb.ac.sl{background:var(--indigo-s);border-color:rgba(107,143,212,.3);color:var(--indigo);}
 .drtb.ac.wk{background:var(--amber-s);border-color:rgba(212,160,80,.3);color:var(--amber);}
 .dr-td{margin:0 14px 6px;background:var(--bg3);border:1.5px solid var(--border2);border-radius:var(--r);height:56px;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:32px;font-weight:500;letter-spacing:.07em;color:var(--text);transition:border-color .15s,box-shadow .15s;}
-.dr-td.active{border-color:var(--accent);box-shadow:0 0 0 3px rgba(91,184,138,.08);}
+.dr-td.active{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 10%,transparent);}
 .cur{display:inline-block;width:2px;height:28px;background:var(--accent);margin-left:2px;vertical-align:middle;animation:bl 1s infinite;}
 @keyframes bl{0%,100%{opacity:1;}50%{opacity:0;}}
 .dr-hint{text-align:center;font-size:11px;color:var(--text2);margin-bottom:8px;}
@@ -298,15 +298,15 @@ a{color:var(--accent);text-decoration:none;}
 .drd:active{transform:scale(.94);}
 .np{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:0 14px 9px;}
 .nk{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:12px;font-family:'DM Mono',monospace;font-size:19px;color:var(--text);text-align:center;transition:all .12s;user-select:none;}
-.nk:active{transform:scale(.90);background:rgba(91,184,138,.1);border-color:rgba(91,184,138,.28);}
+.nk:active{transform:scale(.90);background:color-mix(in srgb,var(--accent) 12%,transparent);border-color:color-mix(in srgb,var(--accent) 32%,transparent);}
 .nk.sm{font-size:11px;letter-spacing:.05em;color:var(--text2);}
 .nk.z2{grid-column:2;}
-.dr-ok{margin:0 14px 14px;width:calc(100% - 28px);padding:13px;border-radius:14px;background:var(--accent);color:#fff;font-family:'Syne',sans-serif;font-size:15px;font-weight:700;transition:all .15s;box-shadow:0 4px 18px rgba(91,184,138,.3);}
+.dr-ok{margin:0 14px 14px;width:calc(100% - 28px);padding:13px;border-radius:14px;background:var(--accent);color:#fff;font-family:'Syne',sans-serif;font-size:15px;font-weight:700;transition:all .15s;box-shadow:0 4px 18px color-mix(in srgb,var(--accent) 35%,transparent);}
 .dr-ok:active{background:var(--accent2);transform:scale(.98);}
 .dr-ok:disabled{opacity:.3;pointer-events:none;background:var(--bg4);box-shadow:none;}
 .nr-hint{font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--text2);text-align:center;margin:0 0 8px;}
 .nr-slots{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin:0 14px 10px;}
-.nr-slot{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:9px 4px;text-align:center;cursor:pointer;transition:all .15s;}
+.nr-slot{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:9px 4px;text-align:center;cursor:pointer;transition:all .15s;}.nr-slot-sel{background:color-mix(in srgb,var(--accent) 13%,transparent) !important;border-color:color-mix(in srgb,var(--accent) 38%,transparent) !important;}.nr-slot-t-sel{color:var(--accent);}
 .nr-slot:active{transform:scale(.93);}
 .nr-slot-t{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--text);}
 .nr-slot-l{font-size:9px;color:var(--text2);margin-top:2px;}
@@ -314,16 +314,16 @@ a{color:var(--accent);text-decoration:none;}
 .dr-field{margin:0 14px 10px;}
 .dr-field label{display:block;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--text2);margin-bottom:5px;}
 .dr-input{width:100%;background:var(--bg3);border:1.5px solid var(--border2);border-radius:var(--rs);padding:10px 13px;font-size:15px;color:var(--text);outline:none;transition:border-color .15s,box-shadow .15s;font-family:inherit;}
-.dr-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(91,184,138,.08);}
+.dr-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 10%,transparent);}
 .emoji-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:0 14px 12px;}
 .emoji-opt{width:100%;aspect-ratio:1;border-radius:12px;background:var(--bg3);border:2px solid transparent;font-size:22px;display:flex;align-items:center;justify-content:center;transition:all .15s;cursor:pointer;}
 .emoji-opt:active{transform:scale(.9);}
-.emoji-opt.sel{border-color:var(--accent);background:rgba(91,184,138,.1);}
+.emoji-opt.sel{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);}
 /* CONFIRM */
 .confirm-ov{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:300;display:none;align-items:center;justify-content:center;padding:24px;}
 .confirm-ov.open{display:flex;}
-.confirm-box{background:var(--bg2);border:1px solid var(--border2);border-radius:18px;padding:22px;width:100%;max-width:300px;text-align:center;box-shadow:0 16px 60px rgba(0,0,0,.6);animation:popUp .2s cubic-bezier(.34,1.3,.64,1);}
-.confirm-icon{font-size:32px;text-align:center;margin-bottom:12px;}
+.confirm-box{background:var(--bg2);border:1px solid var(--border2);border-radius:18px;padding:22px;width:100%;max-width:300px;text-align:center;box-shadow:var(--shadow);animation:popUp .2s cubic-bezier(.34,1.3,.64,1);}
+.confirm-icon{display:flex;align-items:center;justify-content:center;margin-bottom:12px;color:var(--del);}
 .confirm-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;text-align:center;margin-bottom:7px;color:var(--text);}
 .confirm-msg{font-size:13px;color:var(--text2);text-align:center;line-height:1.65;margin-bottom:18px;}
 .confirm-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
@@ -332,7 +332,7 @@ a{color:var(--accent);text-decoration:none;}
 .confirm-btn.cancel{background:var(--bg3);border:1px solid var(--border2);color:var(--text2);}
 .confirm-btn.ok{background:rgba(255,92,92,.1);border:1px solid rgba(255,92,92,.28);color:var(--del);}
 .confirm-btn.ok:active{background:var(--del);color:#fff;border-color:var(--del);}
-.confirm-btn.ok.safe{background:rgba(91,184,138,.1);border-color:rgba(91,184,138,.28);color:var(--accent);}
+.confirm-btn.ok.safe{background:color-mix(in srgb,var(--accent) 12%,transparent);border-color:color-mix(in srgb,var(--accent) 32%,transparent);color:var(--accent);}
 .confirm-btn.ok.safe:active{background:var(--accent);color:#fff;border-color:var(--accent);}
 /* TOAST */
 .toast{position:fixed;bottom:calc(62px + env(safe-area-inset-bottom) + 10px);left:50%;transform:translateX(-50%) translateY(10px);background:var(--bg4);border:1px solid var(--border2);border-radius:20px;padding:7px 16px;font-size:12px;color:var(--text);white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:200;box-shadow:var(--shadow);}
@@ -346,14 +346,19 @@ a{color:var(--accent);text-decoration:none;}
       <div class="dash-top">
         <div class="app-nm">ねむろく</div>
         <div class="dash-top-right">
-          <button class="install-btn" id="installBtn" onclick="installPWA()">📲 アプリ化</button>
+          <button class="install-btn" id="installBtn" onclick="installPWA()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="6" x2="12" y2="14"/><polyline points="9 11 12 14 15 11"/></svg>
+            アプリ化</button>
           <button class="th-btn" id="fsBtn" onclick="toggleFullscreen()" title="全画面">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <path class="fs-expand" d="M1 5V1h4M15 5V1h-4M1 11v4h4M15 11v4h-4"/>
               <path class="fs-compress" style="display:none" d="M5 1v4H1M11 1v4h4M5 15v-4H1M11 15v-4h4"/>
             </svg>
           </button>
-          <button class="th-btn" id="thBtn" onclick="toggleTheme()">🌙</button>
+          <button class="th-btn" id="thBtn" onclick="toggleTheme()">
+            <svg id="thIcMoon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <svg id="thIcSun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
         </div>
       </div>
       <div class="d-stat" id="dStat">
@@ -363,7 +368,7 @@ a{color:var(--accent);text-decoration:none;}
         </div>
         <div class="st-main" id="stMain">—</div>
         <div id="stSub" class="st-sub">「おやすみ」ボタンで記録を開始</div>
-        <div class="st-tips" id="stTips"><span class="tips-ic" id="tipsIc">💡</span><span class="tips-txt" id="tipsTx"></span></div>
+        <div class="st-tips" id="stTips"><span class="tips-ic" id="tipsIc"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="6.34" y1="17.66" x2="4.93" y2="19.07"/><line x1="19.07" y1="4.93" x2="17.66" y2="6.34"/></svg></span><span class="tips-txt" id="tipsTx"></span></div>
       </div>
       <div class="d-stats">
         <div class="st-c"><div class="st-v" id="sAvg">—</div><div class="st-l">平均<br>睡眠時間</div></div>
@@ -383,17 +388,17 @@ a{color:var(--accent);text-decoration:none;}
       </div>
       <div class="d-acts">
         <button class="a-btn sab" id="bSl" onclick="logNow('sleep')">
-          <span class="ab-ic">🌙</span>
+          <span class="ab-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg></span>
           <div class="ab-body"><span class="ab-lb">就寝</span><span class="ab-ti">おやすみ</span><span class="ab-tm" id="slT"></span></div>
         </button>
         <button class="a-btn wab" id="bWk" onclick="logNow('wake')">
-          <span class="ab-ic">☀️</span>
+          <span class="ab-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5" fill="currentColor" stroke="none"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></span>
           <div class="ab-body"><span class="ab-lb">起床</span><span class="ab-ti">おはよう</span><span class="ab-tm" id="wkT"></span></div>
         </button>
       </div>
       <div class="d-acts-full">
         <button class="a-btn vab" id="bNeru" onclick="openNeruOchi()">
-          <span class="ab-ic">💤</span>
+          <span class="ab-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 7h2l-2 2h2"/><path d="M11 4h3l-3 3h3"/><path d="M20 12.79A9 9 0 1 1 10.21 3 7 7 0 0 0 20 12.79z" fill="currentColor" stroke="none"/></svg></span>
           <div class="ab-body"><span class="ab-lb">うっかり</span><span class="ab-ti">寝落ちしてた！</span></div>
         </button>
       </div>
@@ -422,7 +427,7 @@ a{color:var(--accent);text-decoration:none;}
     <div class="page" id="pg-my">
       <div class="pg-hd"><div class="pg-ti">マイページ</div></div>
       <div class="my-av-wrap">
-        <div class="my-av" id="myAv" onclick="openProfileEdit()"><span id="myAvEmoji">😴</span><div class="my-av-edit">✎</div></div>
+        <div class="my-av" id="myAv" onclick="openProfileEdit()"><span id="myAvEmoji">😴</span><div class="my-av-edit"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg></div></div>
         <div class="my-un" id="myUn" onclick="openProfileEdit()">おやすみユーザー</div>
         <div class="my-sb" id="mySb">プロフィールを編集できます</div>
       </div>
@@ -437,8 +442,7 @@ a{color:var(--accent);text-decoration:none;}
       </div>
       <div class="my-sec">
         <div class="my-st">設定</div>
-        <div class="my-row tap" onclick="toggleTheme()"><span>ダークモード</span><div class="tog on" id="togDk"><div class="tog-k"></div></div></div>
-        <div class="my-row"><span>テーマ</span><span class="my-rv" id="thLbl">ダーク</span></div>
+        <div class="my-row tap" onclick="toggleTheme()" style="gap:8px"><span style="flex:1">テーマ</span><span class="my-rv" id="thLbl" style="margin-right:8px">ダーク</span><div class="tog on" id="togDk"><div class="tog-k"></div></div></div>
         <div class="my-row tap" onclick="toggleFullscreen()"><span>全画面表示</span><span class="my-rv" id="fsLabel">OFF</span></div>
         <div class="my-row tap" onclick="toggleNumpadLayout()"><span>テンキー配置</span><span class="my-rv" id="numpadLbl">電話式 (1→9)</span></div>
         <div class="my-row tap" onclick="toggleWeekStart()"><span>カレンダー週始まり</span><span class="my-rv" id="weekStartLbl">月曜始まり</span></div>
@@ -456,7 +460,7 @@ a{color:var(--accent);text-decoration:none;}
       <div class="my-sec" style="margin-bottom:24px;">
         <div class="my-st">データ管理</div>
         <div class="my-row tap" onclick="exportCSV()"><span>CSVエクスポート</span><span style="font-size:16px;color:var(--text2)">›</span></div>
-        <div class="my-row tap" onclick="triggerCSVImport()"><span>CSVインポート</span><span style="font-size:13px;color:var(--text2)">📂 選択</span></div>
+        <div class="my-row tap" onclick="triggerCSVImport()"><span>CSVインポート</span><span style="font-size:13px;color:var(--text2)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:3px"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>選択</span></div>
         <input type="file" accept=".csv,text/csv,text/plain" id="csvImportInput" style="position:fixed;top:-999px;left:-999px;opacity:0;width:1px;height:1px;" onchange="importCSV(this)">
         <div class="my-row tap danger" onclick="confirmClearAll()"><span>すべての記録を削除</span><span style="font-size:16px">›</span></div>
       </div>
@@ -489,8 +493,12 @@ a{color:var(--accent);text-decoration:none;}
   <div class="dr-handle"></div>
   <div class="dr-ti" id="drTi">記録を追加</div>
   <div class="dr-tr">
-    <button class="drtb ac sl" id="dtSl" onclick="setDrType('sleep',true)">🌙 おやすみ</button>
-    <button class="drtb wk" id="dtWk" onclick="setDrType('wake',true)">☀️ おはよう</button>
+    <button class="drtb ac sl" id="dtSl" onclick="setDrType('sleep',true)">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
+    おやすみ</button>
+    <button class="drtb wk" id="dtWk" onclick="setDrType('wake',true)">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex-shrink:0"><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    おはよう</button>
   </div>
   <div class="dr-td" id="drTd"><span id="drTxt">——：——</span><span class="cur" id="drCur"></span></div>
   <div class="dr-hint">3桁 or 4桁 例: <em>730</em>→07:30 / <em>2345</em>→23:45</div>
@@ -542,7 +550,7 @@ a{color:var(--accent);text-decoration:none;}
 </div>
 <div class="confirm-ov" id="confirmOv">
   <div class="confirm-box">
-    <div class="confirm-icon" id="confirmIcon">🗑</div>
+    <div class="confirm-icon" id="confirmIcon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6M9 6V4h6v2"/></svg></div>
     <div class="confirm-title" id="confirmTitle">削除しますか？</div>
     <div class="confirm-msg" id="confirmMsg">この操作は取り消せません。</div>
     <div class="confirm-btns">
@@ -612,8 +620,12 @@ function fmtBuf(buf){
   if(!buf.length)return'——：——';if(buf.length===1)return buf[0]+'—：——';if(buf.length===2)return buf+'：——';
   if(buf.length===3)return buf[0]+buf[1]+'：'+buf[2]+'—';return buf.slice(0,2)+'：'+buf.slice(2,4);
 }
-function showConfirm({icon='🗑',title,msg,okLabel='削除する',okClass='',cb}){
-  document.getElementById('confirmIcon').textContent=icon;document.getElementById('confirmTitle').textContent=title;
+const CONFIRM_ICONS={
+  trash:'<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6M9 6V4h6v2"/></svg>',
+  warn:'<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+};
+function showConfirm({icon='trash',title,msg,okLabel='削除する',okClass='',cb}){
+  const iconEl=document.getElementById('confirmIcon');iconEl.innerHTML=CONFIRM_ICONS[icon]||CONFIRM_ICONS.trash;document.getElementById('confirmTitle').textContent=title;
   document.getElementById('confirmMsg').textContent=msg;
   const okBtn=document.getElementById('confirmOkBtn');okBtn.textContent=okLabel;okBtn.className='confirm-btn ok '+(okClass||'');okBtn._cb=cb;
   document.getElementById('confirmOv').style.display='flex';
@@ -647,19 +659,19 @@ function addRec(type,date,la=false){
   // FIX: トースト表示は常に実際の時刻を表示、睡眠時間補正は考慮しない
   if(type==='sleep'&&la){
     // 寝付くまでの時間補正あり：実際の就寝予定時刻を表示
-    toast(`🌙 ${fT(date)} に就寝予定 (${sleepLatency}分後)`);
+    toast(`就寝予定: ${fT(date)} (${sleepLatency}分後)`);
   } else {
-    toast(type==='sleep'?`🌙 ${fT(date)} おやすみなさい`:`☀️ ${fT(date)} おはようございます`);
+    toast(type==='sleep'?`おやすみ: ${fT(date)}`:`おはよう: ${fT(date)}`);
   }
 }
 function addRecManual(type,date){
   // FAB / ドロワーからの手動追加：sleepLatencyを一切考慮しない
   recs.push({id:Date.now(),t:type,ts:date.getTime()});recs.sort((a,b)=>a.ts-b.ts);recPage=0;save();render();
-  toast(type==='sleep'?`🌙 ${fT(date)} おやすみなさい`:`☀️ ${fT(date)} おはようございます`);
+  toast(type==='sleep'?`おやすみ: ${fT(date)}`:`おはよう: ${fT(date)}`);
 }
 function delRec(idStr){
   const id=Number(idStr);
-  showConfirm({icon:'🗑',title:'記録を削除',msg:'この記録を削除しますか？',okLabel:'削除する',cb:()=>{recs=recs.filter(r=>r.id!==id);recPage=0;save();renderAll();toast('🗑 削除しました');}});
+  showConfirm({icon:'trash',title:'記録を削除',msg:'この記録を削除しますか？',okLabel:'削除する',cb:()=>{recs=recs.filter(r=>r.id!==id);recPage=0;save();renderAll();toast('削除しました');}});
 }
 function showDr(id){if(activeDr)document.getElementById(activeDr).classList.remove('open');activeDr=id;document.getElementById('ov').classList.add('open');document.getElementById(id).classList.add('open');}
 function closeAllDr(){
@@ -691,19 +703,19 @@ function updateDrDisp(){
 }
 function updateAutoTypeHint(){
   const el=document.getElementById('drAutoType');const valid=drBuf.length===3||drBuf.length===4;
-  if(!drUserPickedType&&valid){el.className='dr-auto-type '+drType;el.textContent=drType==='sleep'?'🌙 おやすみとして記録します':'☀️ おはようとして記録します';}
-  else if(drUserPickedType&&valid){el.className='dr-auto-type '+(drType==='sleep'?'sl':'wk');el.textContent=drType==='sleep'?'🌙 おやすみで記録（手動選択中）':'☀️ おはようで記録（手動選択中）';}
+  if(!drUserPickedType&&valid){el.className='dr-auto-type '+drType;el.textContent=drType==='sleep'?'おやすみとして記録します':'おはようとして記録します';}
+  else if(drUserPickedType&&valid){el.className='dr-auto-type '+(drType==='sleep'?'sl':'wk');el.textContent=drType==='sleep'?'おやすみで記録（手動選択中）':'おはようで記録（手動選択中）';}
   else el.className='dr-auto-type none';
 }
 function confirmDr(){
-  const parsed=parseTimeBuf(drBuf);if(!parsed){toast('⚠️ 無効な時刻です');return;}
+  const parsed=parseTimeBuf(drBuf);if(!parsed){toast('無効な時刻です');return;}
   const{h,m}=parsed;const now=new Date();const base=new Date(now);base.setDate(base.getDate()-drDay);base.setHours(h,m,0,0);
   if(drDay===0&&base.getTime()>now.getTime()+2*60*60*1000)base.setDate(base.getDate()-1);
-  if(editId!==null){const idx=recs.findIndex(r=>r.id===editId);if(idx!==-1){recs[idx].t=drType;recs[idx].ts=base.getTime();recs.sort((a,b)=>a.ts-b.ts);save();render();toast('✏️ 更新しました');}}
+  if(editId!==null){const idx=recs.findIndex(r=>r.id===editId);if(idx!==-1){recs[idx].t=drType;recs[idx].ts=base.getTime();recs.sort((a,b)=>a.ts-b.ts);save();render();toast('更新しました');}}
   else{
     // 手動追加はsleepLatency無視
     recs.push({id:Date.now(),t:drType,ts:base.getTime()});recs.sort((a,b)=>a.ts-b.ts);recPage=0;save();render();
-    toast(drType==='sleep'?`🌙 ${fT(base)} おやすみなさい`:`☀️ ${fT(base)} おはようございます`);
+    toast(drType==='sleep'?`おやすみ: ${fT(base)}`:`おはよう: ${fT(base)}`);
   }
   closeAllDr();
 }
@@ -728,10 +740,10 @@ function updateNrDisp(){
 function confirmNeruSlot(sleepDate){
   const wakeDate=new Date();
   recs.push({id:Date.now()-1,t:'sleep',ts:sleepDate.getTime()},{id:Date.now(),t:'wake',ts:wakeDate.getTime()});
-  recs.sort((a,b)=>a.ts-b.ts);save();render();toast(`💤 ${fT(sleepDate)}〜${fT(wakeDate)} を記録しました`);closeAllDr();
+  recs.sort((a,b)=>a.ts-b.ts);save();render();toast(`記録: ${fT(sleepDate)}〜${fT(wakeDate)}`);closeAllDr();
 }
 function confirmNeru(){
-  const parsed=parseTimeBuf(nrBuf);if(!parsed){toast('⚠️ 無効な時刻です');return;}
+  const parsed=parseTimeBuf(nrBuf);if(!parsed){toast('無効な時刻です');return;}
   const{h,m}=parsed;const now=new Date();const base=new Date(now);base.setHours(h,m,0,0);
   if(base.getTime()>now.getTime()+2*60*60*1000)base.setDate(base.getDate()-1);confirmNeruSlot(base);
 }
@@ -744,7 +756,7 @@ function saveProfile(){
   prof.name=document.getElementById('profName').value.trim()||'おやすみユーザー';
   prof.bio=document.getElementById('profBio').value.trim()||'睡眠記録を続けています';
   const sel=document.querySelector('.emoji-opt.sel');if(sel)prof.emoji=sel.textContent;
-  localStorage.setItem('smn_prof',JSON.stringify(prof));renderProfile();closeAllDr();toast('✅ プロフィールを保存しました');
+  localStorage.setItem('smn_prof',JSON.stringify(prof));renderProfile();closeAllDr();toast('プロフィールを保存しました');
 }
 function renderProfile(){document.getElementById('myAvEmoji').textContent=prof.emoji;document.getElementById('myUn').textContent=prof.name;document.getElementById('mySb').textContent=prof.bio;}
 const TIPS_GROUPS = {
@@ -778,8 +790,8 @@ function renderStatus(){
   tips.classList.remove('show');
   if(!last){card.className='d-stat';dot.className='st-dot';main.textContent='—';sub.textContent='「おやすみ」ボタンで記録を開始';badge.style.display='none';sl.classList.remove('dis');wk.classList.add('dis');nr.classList.add('dis');return;}
   const lt=new Date(last.ts),el=Math.floor((Date.now()-last.ts)/60000);
-  if(last.t==='sleep'){card.className='d-stat sleeping';dot.className='st-dot sleeping';main.textContent='就寝中';sub.textContent=`${fT(lt)} から睡眠中`;badge.style.display='inline-flex';badge.className='st-badge sb';badge.textContent=`🌙 ${mHm(el)} 経過`;sl.classList.add('dis');wk.classList.remove('dis');nr.classList.add('dis');}
-  else{card.className='d-stat awake';dot.className='st-dot awake';main.textContent='起床中';sub.textContent=`${fT(lt)} に起床`;badge.style.display='inline-flex';badge.className='st-badge wb';badge.textContent=`☀️ 起床から ${mHm(el)}`;sl.classList.remove('dis');wk.classList.add('dis');nr.classList.remove('dis');const tp=getTips(el);tIc.textContent=tp.ic;tTx.textContent=tp.tx;tips.classList.add('show');}
+  if(last.t==='sleep'){card.className='d-stat sleeping';dot.className='st-dot sleeping';main.textContent='就寝中';sub.textContent=`${fT(lt)} から睡眠中`;badge.style.display='inline-flex';badge.className='st-badge sb';badge.innerHTML=`<svg width='10' height='10' viewBox='0 0 24 24' fill='currentColor' style='vertical-align:middle;margin-right:3px'><path d='M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z'/></svg>${mHm(el)} 経過`;sl.classList.add('dis');wk.classList.remove('dis');nr.classList.add('dis');}
+  else{card.className='d-stat awake';dot.className='st-dot awake';main.textContent='起床中';sub.textContent=`${fT(lt)} に起床`;badge.style.display='inline-flex';badge.className='st-badge wb';badge.innerHTML=`<svg width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' style='vertical-align:middle;margin-right:3px'><circle cx='12' cy='12' r='5' fill='currentColor' stroke='none'/><line x1='12' y1='1' x2='12' y2='3'/><line x1='12' y1='21' x2='12' y2='23'/><line x1='4.22' y1='4.22' x2='5.64' y2='5.64'/><line x1='18.36' y1='18.36' x2='19.78' y2='19.78'/><line x1='1' y1='12' x2='3' y2='12'/><line x1='21' y1='12' x2='23' y2='12'/><line x1='4.22' y1='19.78' x2='5.64' y2='18.36'/><line x1='18.36' y1='5.64' x2='19.78' y2='4.22'/></svg>起床から ${mHm(el)}`;sl.classList.remove('dis');wk.classList.add('dis');nr.classList.remove('dis');const tp=getTips(el);tTx.textContent=tp.tx;tips.classList.add('show');}
 }
 function renderStats(){
   const sess=getSess();const w7=new Date();w7.setDate(w7.getDate()-6);w7.setHours(0,0,0,0);
@@ -831,7 +843,7 @@ function buildRecItems(){
 }
 function sessBlockHTML(s){
   const dur=sessMin(s);
-  return `<div class="sess-block"><div class="sess-row"><div class="sdot wake"></div><div class="sinfo"><div class="stype">☀️ おはよう</div><div class="stime">${fT(s.e)}</div></div><div class="sac"><button class="sib ed" onclick="openDr(${s.wi})">✎</button><button class="sib dl" onclick="delRec(${s.wi})">✕</button></div></div><div class="sess-connector"><div class="conn-line-wrap"><div class="conn-line"></div></div><div class="conn-dur-row"><div class="conn-dur-line"></div><div class="conn-dur">${mHm(dur)}</div><div class="conn-dur-line"></div></div></div><div class="sess-row"><div class="sdot sleep"></div><div class="sinfo"><div class="stype">🌙 おやすみ</div><div class="stime">${fT(s.s)}</div></div><div class="sac"><button class="sib ed" onclick="openDr(${s.si})">✎</button><button class="sib dl" onclick="delRec(${s.si})">✕</button></div></div></div>`;
+  return `<div class="sess-block"><div class="sess-row"><div class="sdot wake"></div><div class="sinfo"><div class="stype"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:middle;margin-right:3px"><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg> おはよう</div><div class="stime">${fT(s.e)}</div></div><div class="sac"><button class="sib ed" onclick="openDr(${s.wi})"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg></button><button class="sib dl" onclick="delRec(${s.wi})"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div></div><div class="sess-connector"><div class="conn-line-wrap"><div class="conn-line"></div></div><div class="conn-dur-row"><div class="conn-dur-line"></div><div class="conn-dur">${mHm(dur)}</div><div class="conn-dur-line"></div></div></div><div class="sess-row"><div class="sdot sleep"></div><div class="sinfo"><div class="stype"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:3px"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg> おやすみ</div><div class="stime">${fT(s.s)}</div></div><div class="sac"><button class="sib ed" onclick="openDr(${s.si})"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg></button><button class="sib dl" onclick="delRec(${s.si})"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div></div></div>`;
 }
 function renderRec(){
   const list=document.getElementById('recL');const pager=document.getElementById('recPager');const pagerInfo=document.getElementById('recPagerInfo');const pagerBtns=document.getElementById('recPagerBtns');
@@ -843,7 +855,7 @@ function renderRec(){
     const itemDate=fD(new Date(item.ts));
     if(itemDate!==lastDate){lastDate=itemDate;const d=new Date(itemDate+'T12:00:00');const diff=Math.round((new Date().setHours(0,0,0,0)-new Date(itemDate).setHours(0,0,0,0))/86400000);const hd=document.createElement('div');hd.className='rec-dg-hd';hd.textContent=diff===0?'今日':diff===1?'昨日':`${MON[d.getMonth()]} ${d.getDate()}日 (${DAY[d.getDay()]})`;list.appendChild(hd);}
     if(item.type==='sess'){const el=document.createElement('div');el.innerHTML=sessBlockHTML(item.s);list.appendChild(el.firstElementChild);}
-    else{const r=item.r;const el=document.createElement('div');el.className='orphan-item';el.innerHTML=`<div class="sdot orphan"></div><div class="sinfo"><div class="stype">${r.t==='sleep'?'🌙 おやすみ（未ペア）':'☀️ おはよう（未ペア）'}</div><div class="stime">${fT(new Date(r.ts))}</div></div><div class="sac"><button class="sib ed" onclick="openDr(${r.id})">✎</button><button class="sib dl" onclick="delRec(${r.id})">✕</button></div>`;list.appendChild(el);}
+    else{const r=item.r;const el=document.createElement('div');el.className='orphan-item';el.innerHTML=`<div class="sdot orphan"></div><div class="sinfo"><div class="stype">${r.t==='sleep'?'<svg width=\'10\' height=\'10\' viewBox=\'0 0 24 24\' fill=\'currentColor\' style=\'vertical-align:middle;margin-right:3px\'><path d=\'M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z\'/></svg> おやすみ（未ペア）':'<svg width=\'10\' height=\'10\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2.5\'><circle cx=\'12\' cy=\'12\' r=\'4\' fill=\'currentColor\' stroke=\'none\'/><line x1=\'12\' y1=\'1\' x2=\'12\' y2=\'3\'/><line x1=\'12\' y1=\'21\' x2=\'12\' y2=\'23\'/></svg> おはよう（未ペア）'}</div><div class="stime">${fT(new Date(r.ts))}</div></div><div class="sac"><button class="sib ed" onclick="openDr(${r.id})"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg></button><button class="sib dl" onclick="delRec(${r.id})"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>`;list.appendChild(el);}
   });
   document.getElementById('recL').parentElement.scrollTop=0;
   if(totalPages<=1){if(pager)pager.style.display='none';return;}if(pager)pager.style.display='flex';
@@ -867,9 +879,9 @@ function renderReport(){
   const rises=weekSess.map(s=>s.e.getHours()+s.e.getMinutes()/60);const avgRise=rises.length?rises.reduce((a,v)=>a+v,0)/rises.length:null;
   const maxBar=Math.max(...dayTotals,480);
   const badges=[];
-  if(activeDays.length>=7)badges.push({ic:'🏆',lbl:'全日記録達成！',earn:true});if(activeDays.length>=5)badges.push({ic:'⭐',lbl:'5日以上記録',earn:true});
-  if(avgDayMin>=420)badges.push({ic:'💎',lbl:'平均7時間以上',earn:true});if(weekSess.length>activeDays.length)badges.push({ic:'🌓',lbl:'分割睡眠あり',earn:false});
-  if(avgDayMin>0&&avgDayMin<360)badges.push({ic:'⚠️',lbl:'睡眠不足気味',earn:false});
+  if(activeDays.length>=7)badges.push({ic:'★',lbl:'全日記録達成！',earn:true});if(activeDays.length>=5)badges.push({ic:'◎',lbl:'5日以上記録',earn:true});
+  if(avgDayMin>=420)badges.push({ic:'◇',lbl:'平均7時間以上',earn:true});if(weekSess.length>activeDays.length)badges.push({ic:'◑',lbl:'分割睡眠あり',earn:false});
+  if(avgDayMin>0&&avgDayMin<360)badges.push({ic:'!',lbl:'睡眠不足気味',earn:false});
   const c=document.getElementById('repContent');c.innerHTML='';
   const hero=document.createElement('div');hero.className='rep-hero';
   hero.innerHTML=`<div class="rep-hcard a"><div class="rep-hl">1日平均睡眠</div><div class="rep-hv">${avgDayMin?mHmS(avgDayMin):'—'}</div><div class="rep-hsub">記録${activeDays.length}日分</div></div><div class="rep-hcard b"><div class="rep-hl">平均就寝</div><div class="rep-hv">${avgBed!==null?`${p2(Math.floor(avgBed%24))}:${p2(Math.round((avgBed%1)*60))}`:'—'}</div><div class="rep-hsub">平均起床 ${avgRise!==null?`${p2(Math.floor(avgRise%24))}:${p2(Math.round((avgRise%1)*60))}`:'—'}</div></div><div class="rep-hcard c"><div class="rep-hl">最長の日</div><div class="rep-hv">${maxDayMin?mHmS(maxDayMin):'—'}</div><div class="rep-hsub">最短 ${minDayMin?mHmS(minDayMin):'—'}</div></div><div class="rep-hcard d"><div class="rep-hl">記録日数</div><div class="rep-hv">${activeDays.length}<span style="font-size:14px;color:var(--text2)">/7</span></div><div class="rep-hsub">セッション${weekSess.length}回</div></div>`;
@@ -898,7 +910,7 @@ function exportCSV(){
     return `${fD(s.s)},${fT(s.s)},${fT(s.e)},${dur},"${mHm(dur)}"`;
   }).join('\n');
   const blob=new Blob(['\uFEFF'+hdr+rows],{type:'text/csv;charset=utf-8;'});
-  const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`nemuroku_${fD(new Date())}.csv`;a.click();URL.revokeObjectURL(url);toast('📥 CSVをダウンロードしました');
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`nemuroku_${fD(new Date())}.csv`;a.click();URL.revokeObjectURL(url);toast('CSVをダウンロードしました');
 }
 
 function triggerCSVImport(){const input=document.getElementById('csvImportInput');input.value='';input.click();}
@@ -911,14 +923,14 @@ function importCSV(input){
       const text=e.target.result.replace(/^\uFEFF/,'');
       const lines=text.trim().split(/\r?\n/);
       const header=lines[0].toLowerCase();
-      if(!header.includes('bedtime')||!header.includes('waketime')){toast('⚠️ CSVのフォーマットが正しくありません');return;}
+      if(!header.includes('bedtime')||!header.includes('waketime')){toast('CSVのフォーマットが正しくありません');return;}
       
       // ヘッダー列のインデックスを動的に取得
       const cols=header.split(',').map(c=>c.trim().replace(/^"|"$/g,''));
       const dateIdx=cols.indexOf('date');
       const bedIdx=cols.indexOf('bedtime');
       const wakeIdx=cols.indexOf('waketime');
-      if(dateIdx<0||bedIdx<0||wakeIdx<0){toast('⚠️ 必要な列が見つかりません');return;}
+      if(dateIdx<0||bedIdx<0||wakeIdx<0){toast('必要な列が見つかりません');return;}
       
       let added=0;
       const existingTs=new Set(recs.map(r=>r.ts));
@@ -966,8 +978,8 @@ function importCSV(input){
       });
       
       recs.sort((a,b)=>a.ts-b.ts);save();renderAll();
-      toast(`📂 ${added}件のセッションをインポートしました`);
-    }catch(err){toast('⚠️ インポートに失敗しました: '+err.message);}
+      toast(`${added}件インポートしました`);
+    }catch(err){toast('インポートに失敗しました: '+err.message);}
   };
   reader.readAsText(file);
 }
@@ -989,26 +1001,28 @@ function renderMy(){
 function toggleWeekStart(){weekStart=weekStart===1?0:1;localStorage.setItem('smn_ws',String(weekStart));renderMy();renderCal();if(document.querySelector('.page.active')?.id==='pg-rep')renderReport();}
 function openSleepLatencyDr(){
   const slots=document.getElementById('latencySlots');slots.innerHTML='';
-  [0,5,10,15,20,30,45,60].forEach(min=>{const btn=document.createElement('button');btn.className='nr-slot';const isSel=min===sleepLatency;if(isSel)btn.style.cssText='background:rgba(91,184,138,.12);border-color:rgba(91,184,138,.35);';btn.innerHTML=`<div class="nr-slot-t" style="${isSel?'color:var(--accent)':''}">${min===0?'OFF':min+'分'}</div><div class="nr-slot-l">${min===0?'即記録':min+'分後に記録'}</div>`;btn.onclick=()=>{sleepLatency=min;localStorage.setItem('smn_sl',String(min));renderMy();closeAllDr();toast(`⏱ 寝付くまでの時間: ${min===0?'OFF':min+'分'}`);};slots.appendChild(btn);});showDr('drLatency');
+  [0,5,10,15,20,30,45,60].forEach(min=>{const btn=document.createElement('button');btn.className='nr-slot';const isSel=min===sleepLatency;if(isSel)btn.classList.add('nr-slot-sel');btn.innerHTML=`<div class="nr-slot-t${isSel?' nr-slot-t-sel':''}">${min===0?'OFF':min+'分'}</div><div class="nr-slot-l">${min===0?'即記録':min+'分後に記録'}</div>`;btn.onclick=()=>{sleepLatency=min;localStorage.setItem('smn_sl',String(min));renderMy();closeAllDr();toast(`寝付く時間: ${min===0?'OFF':min+'分'}`);};slots.appendChild(btn);});showDr('drLatency');
 }
-function toggleTheme(){const isDark=document.documentElement.getAttribute('data-theme')==='dark';const next=isDark?'light':'dark';document.documentElement.setAttribute('data-theme',next);document.getElementById('thBtn').textContent=next==='dark'?'🌙':'☀️';document.getElementById('thLbl').textContent=next==='dark'?'ダーク':'ライト';document.getElementById('togDk').classList.toggle('on',next==='dark');document.getElementById('metaTheme').content=next==='dark'?'#121212':'#fdfdfd';localStorage.setItem('smn_th',next);}
-function confirmClearAll(){showConfirm({icon:'⚠️',title:'全記録を削除',msg:'すべての記録を削除します。\nこの操作は取り消せません。',okLabel:'すべて削除',cb:()=>{recs=[];save();renderAll();toast('🗑 すべて削除しました');}});}
+function toggleTheme(){const isDark=document.documentElement.getAttribute('data-theme')==='dark';const next=isDark?'light':'dark';document.documentElement.setAttribute('data-theme',next);const moon=document.getElementById('thIcMoon'),sun=document.getElementById('thIcSun');if(moon&&sun){moon.style.display=next==='dark'?'':'none';sun.style.display=next==='dark'?'none':'';}document.getElementById('thLbl').textContent=next==='dark'?'ダーク':'ライト';document.getElementById('togDk').classList.toggle('on',next==='dark');document.getElementById('metaTheme').content=next==='dark'?'#121212':'#fdfdfd';localStorage.setItem('smn_th',next);}
+function confirmClearAll(){showConfirm({icon:'warn',title:'全記録を削除',msg:'すべての記録を削除します。\nこの操作は取り消せません。',okLabel:'すべて削除',cb:()=>{recs=[];save();renderAll();toast('すべて削除しました');}});}
 
 // ── 友達に共有する ──
 function shareApp(){
-  const url='https://modurili.github.io/nemuroku/'; // 実際のURLに変更してください
+  const url='https://modurili.github.io/Nemuroku/';
   const text='ねむろく - シンプルな睡眠記録アプリ';
   if(navigator.share){
     navigator.share({title:'ねむろく',text,url}).catch(()=>{});
   }else{
     navigator.clipboard.writeText(url)
-      .then(()=>toast('🔗 URLをコピーしました'))
-      .catch(()=>toast('⚠️ コピーできませんでした'));
+      .then(()=>toast('URLをコピーしました'))
+      .catch(()=>toast('コピーできませんでした'));
   }
 }
 
 const CHANGELOG=[
-  {v:'1.1.0',date:'2025-04-18',note:'アクセントカラー6色選択機能追加。睡眠グラフの色をテーマカラーに連動。CSVエクスポート/インポートの日付ずれバグ修正（インポートで列を動的に取得し、翌日起床を正しく処理）。記録一覧のページャーとFABボタンの重なり解消。手動追加時のトースト表示バグ修正（寝付くまでの時間を誤表示しない）。「友達に共有する」ボタンをマイページに追加。'},
+  {v:'1.3.0',date:'2025-04-19',note:'テーマ設定行を1行に統合。アクセントカラーが反映されていた箇所（睡眠時間バッジ・FABシャドウ・アバター選択・ページャー等）をすべてCSS変数化。ライトモードの就寝/起床ドット色を改善。'},
+  {v:'1.2.0',date:'2025-04-19',note:'絵文字をすべてSVGシルエットアイコンに統一。ダークモードトグルの背景色をアクセントカラーに連動。共有URLを正式化。'},
+  {v:'1.1.0',date:'2025-04-18',note:'アクセントカラー6色選択。CSVインポートバグ修正。FAB・ページャー重なり解消。「友達に共有する」追加。'},
   {v:'1.0.0',date:'2025-03-19',note:'正式リリース。これまでの開発版（v0.3.7まで）を統合し、安定版として公開。'},
   {v:'0.3.7',date:'2025-03-19',note:'フッターの黒モヤ解消。棒グラフの描画バグ修正。スワイプジェスチャー追加。記録一覧ページング追加。'},
   {v:'0.3.6',date:'2025-03-19',note:'セッションブロックをおはよう上・おやすみ下の順に変更。カレンダー週始まり設定追加。寝付くまでの時間設定追加。'},
@@ -1028,12 +1042,12 @@ function renderVersionHistory(){
   const sec=document.createElement('div');sec.className='my-sec';
   CHANGELOG.forEach((entry,i)=>{const row=document.createElement('div');row.className='my-row';row.style.cssText='flex-direction:column;align-items:flex-start;gap:4px;padding:13px 14px;';const isCurrent=i===0;row.innerHTML=`<div style="display:flex;justify-content:space-between;width:100%;align-items:center"><span style="font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:${isCurrent?'var(--accent)':'var(--text)'}">${isCurrent?'▶ ':''}v${entry.v}${isCurrent?' (現在)':''}</span><span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text2)">${entry.date}</span></div><span style="font-size:12px;color:var(--text2);line-height:1.6">${entry.note}</span>`;sec.appendChild(row);});list.appendChild(sec);
 }
-function toggleFullscreen(){const el=document.documentElement;const isFs=!!(document.fullscreenElement||document.webkitFullscreenElement||document.mozFullScreenElement);if(!isFs){const req=el.requestFullscreen||el.webkitRequestFullscreen||el.mozRequestFullScreen||el.msRequestFullscreen;if(req)req.call(el).catch(()=>toast('⚠️ 全画面に対応していません'));else toast('⚠️ このブラウザは全画面に対応していません');}else{const ex=document.exitFullscreen||document.webkitExitFullscreen||document.mozCancelFullScreen;if(ex)ex.call(document);}}
+function toggleFullscreen(){const el=document.documentElement;const isFs=!!(document.fullscreenElement||document.webkitFullscreenElement||document.mozFullScreenElement);if(!isFs){const req=el.requestFullscreen||el.webkitRequestFullscreen||el.mozRequestFullScreen||el.msRequestFullscreen;if(req)req.call(el).catch(()=>toast('全画面に対応していません'));else toast('このブラウザは全画面に対応していません');}else{const ex=document.exitFullscreen||document.webkitExitFullscreen||document.mozCancelFullScreen;if(ex)ex.call(document);}}
 function updateFsLabel(){const isFs=!!(document.fullscreenElement||document.webkitFullscreenElement||document.mozFullScreenElement);const myLbl=document.getElementById('fsLabel');if(myLbl)myLbl.textContent=isFs?'ON ✓':'OFF';const expand=document.querySelector('.fs-expand');const compress=document.querySelector('.fs-compress');if(expand)expand.style.display=isFs?'none':'';if(compress)compress.style.display=isFs?'':'none';}
 document.addEventListener('fullscreenchange',updateFsLabel);document.addEventListener('webkitfullscreenchange',updateFsLabel);document.addEventListener('mozfullscreenchange',updateFsLabel);
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById('installBtn').classList.add('show');});
 function installPWA(){if(!deferredPrompt)return;deferredPrompt.prompt();deferredPrompt.userChoice.then(()=>{deferredPrompt=null;document.getElementById('installBtn').classList.remove('show');});}
-window.addEventListener('appinstalled',()=>{document.getElementById('installBtn').classList.remove('show');toast('📲 ホーム画面に追加しました！');});
+window.addEventListener('appinstalled',()=>{document.getElementById('installBtn').classList.remove('show');toast('ホーム画面に追加しました');});
 (function initGestures(){
   let tx0=0,ty0=0,target=null;const THRESH=50,RATIO=1.5;
   function onStart(e){const t=e.touches?e.touches[0]:e;tx0=t.clientX;ty0=t.clientY;target=e.currentTarget;}
@@ -1047,7 +1061,8 @@ function render(){renderAll();}
 (function init(){
   const th=localStorage.getItem('smn_th')||'dark';
   document.documentElement.setAttribute('data-theme',th);
-  document.getElementById('thBtn').textContent=th==='dark'?'🌙':'☀️';
+  const _moon=document.getElementById('thIcMoon'),_sun=document.getElementById('thIcSun');
+  if(_moon&&_sun){_moon.style.display=th==='dark'?'':'none';_sun.style.display=th==='dark'?'none':'';}
   document.getElementById('thLbl').textContent=th==='dark'?'ダーク':'ライト';
   document.getElementById('togDk').classList.toggle('on',th==='dark');
   document.getElementById('metaTheme').content=th==='dark'?'#121212':'#fdfdfd';
