@@ -14,6 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@400;500&family=Noto+Sans+JP:wght@400;500&display=swap" rel="stylesheet">
 <style>
+/* ── ACCENT COLORS ── */
 :root{
   --accent:#5bb88a;--accent2:#3da66e;
 }
@@ -124,7 +125,8 @@ a{color:var(--accent);text-decoration:none;}
 .cal-day-hd.tod .dn{background:var(--accent);color:#fff;}
 .cal-col{flex:1;background:var(--bg3);border-radius:2px;position:relative;overflow:hidden;}
 .cal-col::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(to bottom,transparent,transparent calc(100%/8 - .5px),var(--border) calc(100%/8 - .5px),var(--border) calc(100%/8));pointer-events:none;z-index:0;}
-.slb{position:absolute;left:1px;right:1px;border-radius:2px;background:linear-gradient(160deg,var(--indigo),var(--violet));opacity:.78;z-index:1;overflow:hidden;cursor:default;transition:opacity .15s;}
+.slb{position:absolute;left:1px;right:1px;border-radius:2px;opacity:.78;z-index:1;overflow:hidden;cursor:default;transition:opacity .15s;}
+.slb{background:linear-gradient(160deg,var(--accent),var(--accent2));}
 .slb:hover{opacity:1;}
 .slb-lbl{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:7px;color:rgba(255,255,255,.9);pointer-events:none;text-align:center;padding:1px;}
 .cur-line{position:absolute;left:0;right:0;height:1px;background:var(--accent);z-index:2;pointer-events:none;}
@@ -147,9 +149,10 @@ a{color:var(--accent);text-decoration:none;}
 .ab-tm{font-family:'DM Mono',monospace;font-size:9px;color:var(--text2);}
 /* RECORDS */
 #pg-rec{display:flex;flex-direction:column;height:100%;overflow:hidden;}
-.rl-wrap{flex:1;overflow-y:auto;padding:8px 14px;-webkit-overflow-scrolling:touch;}
+.rl-wrap{flex:1;overflow-y:auto;padding:8px 14px 8px;-webkit-overflow-scrolling:touch;}
 .rl-wrap::-webkit-scrollbar{width:0;}
-.rec-pager{display:flex;align-items:center;justify-content:space-between;padding:8px 14px 10px;flex-shrink:0;border-top:1px solid var(--border);}
+/* Fixed pager above the FAB */
+.rec-pager{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;flex-shrink:0;border-top:1px solid var(--border);background:var(--bg);/* pager sits above content, FAB sits above pager via z-index */}
 .rec-pager-info{font-family:'DM Mono',monospace;font-size:11px;color:var(--text2);}
 .rec-pager-btns{display:flex;gap:5px;align-items:center;}
 .rec-pg-btn{width:30px;height:30px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text2);transition:all .15s;font-family:'DM Mono',monospace;}
@@ -181,7 +184,8 @@ a{color:var(--accent);text-decoration:none;}
 .conn-dur{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);background:rgba(91,184,138,.1);border:1px solid rgba(91,184,138,.2);padding:2px 10px;border-radius:10px;}
 .conn-dur-line{flex:1;height:1px;background:var(--border);}
 .orphan-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rs);display:flex;align-items:center;gap:10px;padding:11px 13px;margin-bottom:8px;animation:popUp .2s cubic-bezier(.34,1.56,.64,1);}
-.fab{position:absolute;bottom:16px;right:16px;width:50px;height:50px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;box-shadow:0 4px 20px rgba(91,184,138,.4);transition:all .2s;z-index:6;}
+/* FAB — fixed position above pager */
+.fab{position:absolute;bottom:72px;right:16px;width:50px;height:50px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;box-shadow:0 4px 20px rgba(91,184,138,.4);transition:all .2s;z-index:6;}
 .fab:active{transform:scale(.94);}
 .empty{text-align:center;padding:56px 24px;color:var(--text2);font-size:13px;line-height:1.8;}
 /* REPORT */
@@ -254,6 +258,11 @@ a{color:var(--accent);text-decoration:none;}
 .tog.on{background:rgba(91,184,138,.15);border-color:rgba(91,184,138,.4);}
 .tog-k{position:absolute;top:2px;left:2px;width:19px;height:19px;border-radius:50%;background:var(--text3);transition:transform .22s cubic-bezier(.34,1.56,.64,1),background .2s;box-shadow:0 1px 3px rgba(0,0,0,.35);}
 .tog.on .tog-k{transform:translateX(19px);background:var(--accent);}
+/* ACCENT PICKER */
+.acc-picker{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.acc-dot{width:26px;height:26px;border-radius:50%;border:2.5px solid transparent;cursor:pointer;transition:transform .15s,border-color .15s;flex-shrink:0;}
+.acc-dot.on{border-color:var(--text);transform:scale(1.2);}
+.acc-dot:active{transform:scale(1.1);}
 /* VERSION PAGE */
 #pg-ver{overflow-y:auto;padding:0;}
 #pg-ver::-webkit-scrollbar{width:0;}
@@ -434,6 +443,7 @@ a{color:var(--accent);text-decoration:none;}
         <div class="my-row tap" onclick="toggleNumpadLayout()"><span>テンキー配置</span><span class="my-rv" id="numpadLbl">電話式 (1→9)</span></div>
         <div class="my-row tap" onclick="toggleWeekStart()"><span>カレンダー週始まり</span><span class="my-rv" id="weekStartLbl">月曜始まり</span></div>
         <div class="my-row tap" onclick="openSleepLatencyDr()"><span>寝付くまでの時間</span><span class="my-rv" id="sleepLatencyLbl">0分</span></div>
+        <div class="my-row"><span>アクセントカラー</span><div class="acc-picker" id="myAccPicker"></div></div>
       </div>
       <div class="my-sec">
         <div class="my-st">このアプリについて</div>
@@ -441,6 +451,7 @@ a{color:var(--accent);text-decoration:none;}
         <div class="my-row"><span>バージョン</span><span class="my-rv" id="curVersion">—</span></div>
         <div class="my-row tap" onclick="goPage('ver')"><span>バージョン更新履歴</span><span style="font-size:16px;color:var(--text2)">›</span></div>
         <div class="my-row"><span>開発者</span><a href="https://x.com/modurili" target="_blank" style="font-size:13px;">@modurili ↗</a></div>
+        <div class="my-row tap" onclick="shareApp()"><span>友達に共有する</span><span style="font-size:16px;color:var(--text2)">↗</span></div>
       </div>
       <div class="my-sec" style="margin-bottom:24px;">
         <div class="my-st">データ管理</div>
@@ -542,6 +553,36 @@ a{color:var(--accent);text-decoration:none;}
 </div>
 <div class="toast" id="toast"></div>
 <script>
+// ── ACCENT COLORS ──
+const ACCENTS = {
+  green:  { hex:'#5bb88a', hex2:'#3da66e' },
+  teal:   { hex:'#4ec9c0', hex2:'#2da09a' },
+  blue:   { hex:'#5b96d4', hex2:'#4a88cc' },
+  purple: { hex:'#9b7de0', hex2:'#7a5acc' },
+  rose:   { hex:'#e06fa0', hex2:'#c05880' },
+  orange: { hex:'#e08050', hex2:'#c06830' },
+};
+const ACCENT_ORDER = ['green','teal','blue','purple','rose','orange'];
+
+let currentAccent = localStorage.getItem('smn_accent') || 'green';
+
+function applyAccent(name, persist=true) {
+  currentAccent = name;
+  const a = ACCENTS[name] || ACCENTS.green;
+  document.documentElement.style.setProperty('--accent', a.hex);
+  document.documentElement.style.setProperty('--accent2', a.hex2);
+  if (persist) localStorage.setItem('smn_accent', name);
+  renderAccentPicker();
+}
+
+function renderAccentPicker() {
+  const el = document.getElementById('myAccPicker'); if (!el) return;
+  el.innerHTML = ACCENT_ORDER.map(name => {
+    const a = ACCENTS[name];
+    return `<button class="acc-dot${currentAccent===name?' on':''}" style="background:${a.hex}" onclick="applyAccent('${name}')" title="${name}"></button>`;
+  }).join('');
+}
+
 let recs=JSON.parse(localStorage.getItem('smn')||'[]');
 let prof=JSON.parse(localStorage.getItem('smn_prof')||'{"name":"おやすみユーザー","bio":"睡眠記録を続けています","emoji":"😴"}');
 let wkOff=0,repWkOff=0,editId=null;
@@ -603,8 +644,18 @@ function logNow(type){
 }
 function addRec(type,date,la=false){
   recs.push({id:Date.now(),t:type,ts:date.getTime(),la:la||undefined});recs.sort((a,b)=>a.ts-b.ts);recPage=0;save();render();
-  if(type==='sleep'&&sleepLatency>0)toast(`🌙 ${fT(date)} に就寝予定 (${sleepLatency}分後)`);
-  else toast(type==='sleep'?`🌙 ${fT(date)} おやすみなさい`:`☀️ ${fT(date)} おはようございます`);
+  // FIX: トースト表示は常に実際の時刻を表示、睡眠時間補正は考慮しない
+  if(type==='sleep'&&la){
+    // 寝付くまでの時間補正あり：実際の就寝予定時刻を表示
+    toast(`🌙 ${fT(date)} に就寝予定 (${sleepLatency}分後)`);
+  } else {
+    toast(type==='sleep'?`🌙 ${fT(date)} おやすみなさい`:`☀️ ${fT(date)} おはようございます`);
+  }
+}
+function addRecManual(type,date){
+  // FAB / ドロワーからの手動追加：sleepLatencyを一切考慮しない
+  recs.push({id:Date.now(),t:type,ts:date.getTime()});recs.sort((a,b)=>a.ts-b.ts);recPage=0;save();render();
+  toast(type==='sleep'?`🌙 ${fT(date)} おやすみなさい`:`☀️ ${fT(date)} おはようございます`);
 }
 function delRec(idStr){
   const id=Number(idStr);
@@ -649,7 +700,11 @@ function confirmDr(){
   const{h,m}=parsed;const now=new Date();const base=new Date(now);base.setDate(base.getDate()-drDay);base.setHours(h,m,0,0);
   if(drDay===0&&base.getTime()>now.getTime()+2*60*60*1000)base.setDate(base.getDate()-1);
   if(editId!==null){const idx=recs.findIndex(r=>r.id===editId);if(idx!==-1){recs[idx].t=drType;recs[idx].ts=base.getTime();recs.sort((a,b)=>a.ts-b.ts);save();render();toast('✏️ 更新しました');}}
-  else addRec(drType,base);
+  else{
+    // 手動追加はsleepLatency無視
+    recs.push({id:Date.now(),t:drType,ts:base.getTime()});recs.sort((a,b)=>a.ts-b.ts);recPage=0;save();render();
+    toast(drType==='sleep'?`🌙 ${fT(base)} おやすみなさい`:`☀️ ${fT(base)} おはようございます`);
+  }
   closeAllDr();
 }
 function openNeruOchi(){nrBuf='';buildNrSlots();updateNrDisp();showDr('drNeru');}
@@ -693,161 +748,18 @@ function saveProfile(){
 }
 function renderProfile(){document.getElementById('myAvEmoji').textContent=prof.emoji;document.getElementById('myUn').textContent=prof.name;document.getElementById('mySb').textContent=prof.bio;}
 const TIPS_GROUPS = {
-  h0: [
-    { ic:'🌅', tx:'おはようございます。まずは一杯の水で体を起こしましょう。' },
-    { ic:'💧', tx:'寝ている間に水分が減っています。ゆっくり補給を。' },
-    { ic:'🌤', tx:'カーテンを開けて光を浴びると目が覚めやすくなります。' },
-    { ic:'🥱', tx:'まだぼんやりしていて普通です。無理に急がなくて大丈夫。' },
-    { ic:'🪟', tx:'外の空気を少し吸うと気分が切り替わります。' },
-    { ic:'🚶', tx:'軽く体を動かすと目覚めが早まります。' },
-    { ic:'🫗', tx:'冷たい水で顔を洗うのもおすすめです。' },
-    { ic:'🍽', tx:'軽い朝食でエネルギーを入れましょう。' },
-    { ic:'📖', tx:'難しいことは後回しでOK。まずは簡単なことから。' },
-    { ic:'🌱', tx:'今日もゆっくりスタートで大丈夫です。' }
-  ],
-
-  h1: [
-    { ic:'✨', tx:'少しずつ頭が働き始めています。軽い作業から。' },
-    { ic:'📋', tx:'今日やることを書き出しておくと楽になります。' },
-    { ic:'☕', tx:'コーヒーは少し待ってから飲むと効きやすいです。' },
-    { ic:'🚶', tx:'短い散歩で頭がスッキリします。' },
-    { ic:'🧩', tx:'簡単なタスクでリズムを作りましょう。' },
-    { ic:'📚', tx:'軽い読書や復習に向いています。' },
-    { ic:'🎧', tx:'音楽で気分を上げるのもありです。' },
-    { ic:'🪴', tx:'ゆっくり深呼吸して体を整えましょう。' },
-    { ic:'🖊', tx:'メモを取る習慣をつけると後で助かります。' },
-    { ic:'🔄', tx:'無理に全力を出さなくて大丈夫です。' }
-  ],
-
-  h2: [
-    { ic:'🧠', tx:'集中しやすい時間です。大事な作業を進めましょう。' },
-    { ic:'🎯', tx:'判断が必要なことは今がやりやすいです。' },
-    { ic:'💡', tx:'アイデアが浮かびやすいタイミングです。' },
-    { ic:'🔥', tx:'今が一番勢いに乗りやすい時間帯です。' },
-    { ic:'📩', tx:'重要な連絡は今のうちに。' },
-    { ic:'📝', tx:'集中が続くうちに一気に進めましょう。' },
-    { ic:'📊', tx:'考える作業にぴったりです。' },
-    { ic:'⏳', tx:'時間を区切るとさらに効率が上がります。' },
-    { ic:'🚫', tx:'通知はオフにして集中を守りましょう。' },
-    { ic:'🏁', tx:'一つ終わらせると勢いがつきます。' }
-  ],
-
-  h4: [
-    { ic:'⚡', tx:'まだ集中が続いています。もうひと伸びできます。' },
-    { ic:'🎨', tx:'発想を使う作業に向いています。' },
-    { ic:'📚', tx:'学習にも良い時間です。' },
-    { ic:'🎵', tx:'音楽を流すと集中しやすくなります。' },
-    { ic:'🧩', tx:'少し難しい課題にも挑戦できます。' },
-    { ic:'🖥', tx:'作業をまとめて進めるチャンスです。' },
-    { ic:'✍️', tx:'文章を書くのにも向いています。' },
-    { ic:'📌', tx:'重要な部分から先に終わらせましょう。' },
-    { ic:'🔍', tx:'細かい確認も今のうちに。' },
-    { ic:'🚀', tx:'流れに乗って進めましょう。' }
-  ],
-
-  h6: [
-    { ic:'🎯', tx:'判断がしやすい時間です。決断するなら今。' },
-    { ic:'🤝', tx:'人と話すのに向いています。' },
-    { ic:'💼', tx:'会議や打ち合わせに良いタイミングです。' },
-    { ic:'🌟', tx:'自信を持って動ける時間です。' },
-    { ic:'📞', tx:'連絡ごとは今のうちに済ませましょう。' },
-    { ic:'🧠', tx:'考えがまとまりやすいです。' },
-    { ic:'📣', tx:'意見を伝えるのにも適しています。' },
-    { ic:'🗂', tx:'整理や調整もスムーズに進みます。' },
-    { ic:'🔑', tx:'大事な判断はここで。' },
-    { ic:'🏆', tx:'成果につながりやすい時間です。' }
-  ],
-
-  h8: [
-    { ic:'☕', tx:'少し疲れが出てきます。短く休みましょう。' },
-    { ic:'👀', tx:'目を休ませると楽になります。' },
-    { ic:'🚰', tx:'水分を忘れずに。' },
-    { ic:'🪑', tx:'一度立ち上がるだけでもリフレッシュになります。' },
-    { ic:'🍫', tx:'軽くエネルギー補給を。' },
-    { ic:'🧘', tx:'深呼吸でリセットしましょう。' },
-    { ic:'⏸', tx:'5分の休憩で集中が戻ります。' },
-    { ic:'📵', tx:'少し画面から離れるのも大切です。' },
-    { ic:'🚶', tx:'軽く歩くと頭がスッキリします。' },
-    { ic:'🌿', tx:'無理せずペースを整えましょう。' }
-  ],
-
-  h10: [
-    { ic:'😴', tx:'少し眠くなるのは自然です。' },
-    { ic:'🛋', tx:'短い休憩で回復できます。' },
-    { ic:'🌿', tx:'目を閉じるだけでも楽になります。' },
-    { ic:'🚶', tx:'少し歩くと眠気が和らぎます。' },
-    { ic:'☀️', tx:'光を浴びると目が覚めやすいです。' },
-    { ic:'🧃', tx:'水分補給でスッキリします。' },
-    { ic:'🍽', tx:'食後はゆっくりで大丈夫です。' },
-    { ic:'🔄', tx:'軽い作業に切り替えましょう。' },
-    { ic:'📉', tx:'集中が落ちるのは普通です。' },
-    { ic:'🌈', tx:'無理せず整えましょう。' }
-  ],
-
-  h12: [
-    { ic:'🌀', tx:'眠気のピークです。無理しないで。' },
-    { ic:'🧊', tx:'顔を洗うとスッキリします。' },
-    { ic:'🪟', tx:'換気で気分が変わります。' },
-    { ic:'🏃', tx:'少し動くと目が覚めます。' },
-    { ic:'🎧', tx:'音楽で気分転換もおすすめです。' },
-    { ic:'🧘', tx:'深呼吸でリセットしましょう。' },
-    { ic:'🍬', tx:'軽く甘いものも効果的です。' },
-    { ic:'📵', tx:'一度画面から離れましょう。' },
-    { ic:'🔁', tx:'単純作業に切り替えるのも手です。' },
-    { ic:'🌱', tx:'ゆっくり戻せば大丈夫です。' }
-  ],
-
-  h14: [
-    { ic:'🔄', tx:'少しずつ集中が戻ってきます。' },
-    { ic:'📝', tx:'繰り返し作業に向いています。' },
-    { ic:'🎧', tx:'音楽でリズムを作りましょう。' },
-    { ic:'📦', tx:'細かい作業を片付けるチャンスです。' },
-    { ic:'🧩', tx:'軽めのタスクを進めましょう。' },
-    { ic:'📊', tx:'整理やまとめに向いています。' },
-    { ic:'⏳', tx:'短い区切りで進めると楽です。' },
-    { ic:'🚶', tx:'軽く動くとさらに調子が上がります。' },
-    { ic:'🌈', tx:'あと少しの時間帯です。' },
-    { ic:'📌', tx:'優先順位を見直しましょう。' }
-  ],
-
-  h16: [
-    { ic:'🌆', tx:'体がよく動く時間です。' },
-    { ic:'🏋', tx:'運動に向いています。' },
-    { ic:'🌇', tx:'今日の振り返りをすると楽です。' },
-    { ic:'🎮', tx:'少し息抜きもOKです。' },
-    { ic:'🚶', tx:'体を動かすと気分が上がります。' },
-    { ic:'📒', tx:'明日の準備を始めましょう。' },
-    { ic:'🧠', tx:'頭もまだしっかり動いています。' },
-    { ic:'📊', tx:'整理やまとめに最適です。' },
-    { ic:'🌿', tx:'リズムよく過ごせます。' },
-    { ic:'🏁', tx:'一日の締めに向かいましょう。' }
-  ],
-
-  h18: [
-    { ic:'🌙', tx:'そろそろ落ち着く時間です。' },
-    { ic:'📱', tx:'画面は少し暗めにしましょう。' },
-    { ic:'🛁', tx:'お風呂でリラックスできます。' },
-    { ic:'📵', tx:'スマホは控えめに。' },
-    { ic:'🕯', tx:'明かりを落とすと眠りやすくなります。' },
-    { ic:'📖', tx:'静かな時間を過ごしましょう。' },
-    { ic:'🧘', tx:'ゆっくり深呼吸を。' },
-    { ic:'🍵', tx:'温かい飲み物で落ち着きます。' },
-    { ic:'🌌', tx:'体を休める準備です。' },
-    { ic:'🛌', tx:'無理せずリラックスを。' }
-  ],
-
-  h20: [
-    { ic:'💤', tx:'そろそろ休む時間です。' },
-    { ic:'🌛', tx:'今日はよく頑張りました。' },
-    { ic:'😮‍💨', tx:'疲れはしっかり取るのが大切です。' },
-    { ic:'🌃', tx:'夜更かしはほどほどに。' },
-    { ic:'🛌', tx:'早めに布団に入りましょう。' },
-    { ic:'📵', tx:'スマホは置いて休みましょう。' },
-    { ic:'🕯', tx:'明かりを落とすと眠りやすいです。' },
-    { ic:'🧘', tx:'ゆっくり呼吸して落ち着きましょう。' },
-    { ic:'🌙', tx:'体をしっかり休ませてください。' },
-    { ic:'🌠', tx:'明日に備えてぐっすりと。' }
-  ]
+  h0: [{ic:'🌅',tx:'おはようございます。まずは一杯の水で体を起こしましょう。'},{ic:'💧',tx:'寝ている間に水分が減っています。ゆっくり補給を。'},{ic:'🌤',tx:'カーテンを開けて光を浴びると目が覚めやすくなります。'},{ic:'🥱',tx:'まだぼんやりしていて普通です。無理に急がなくて大丈夫。'},{ic:'🪟',tx:'外の空気を少し吸うと気分が切り替わります。'},{ic:'🚶',tx:'軽く体を動かすと目覚めが早まります。'},{ic:'🫗',tx:'冷たい水で顔を洗うのもおすすめです。'},{ic:'🍽',tx:'軽い朝食でエネルギーを入れましょう。'},{ic:'📖',tx:'難しいことは後回しでOK。まずは簡単なことから。'},{ic:'🌱',tx:'今日もゆっくりスタートで大丈夫です。'}],
+  h1: [{ic:'✨',tx:'少しずつ頭が働き始めています。軽い作業から。'},{ic:'📋',tx:'今日やることを書き出しておくと楽になります。'},{ic:'☕',tx:'コーヒーは少し待ってから飲むと効きやすいです。'},{ic:'🚶',tx:'短い散歩で頭がスッキリします。'},{ic:'🧩',tx:'簡単なタスクでリズムを作りましょう。'},{ic:'📚',tx:'軽い読書や復習に向いています。'},{ic:'🎧',tx:'音楽で気分を上げるのもありです。'},{ic:'🪴',tx:'ゆっくり深呼吸して体を整えましょう。'},{ic:'🖊',tx:'メモを取る習慣をつけると後で助かります。'},{ic:'🔄',tx:'無理に全力を出さなくて大丈夫です。'}],
+  h2: [{ic:'🧠',tx:'集中しやすい時間です。大事な作業を進めましょう。'},{ic:'🎯',tx:'判断が必要なことは今がやりやすいです。'},{ic:'💡',tx:'アイデアが浮かびやすいタイミングです。'},{ic:'🔥',tx:'今が一番勢いに乗りやすい時間帯です。'},{ic:'📩',tx:'重要な連絡は今のうちに。'},{ic:'📝',tx:'集中が続くうちに一気に進めましょう。'},{ic:'📊',tx:'考える作業にぴったりです。'},{ic:'⏳',tx:'時間を区切るとさらに効率が上がります。'},{ic:'🚫',tx:'通知はオフにして集中を守りましょう。'},{ic:'🏁',tx:'一つ終わらせると勢いがつきます。'}],
+  h4: [{ic:'⚡',tx:'まだ集中が続いています。もうひと伸びできます。'},{ic:'🎨',tx:'発想を使う作業に向いています。'},{ic:'📚',tx:'学習にも良い時間です。'},{ic:'🎵',tx:'音楽を流すと集中しやすくなります。'},{ic:'🧩',tx:'少し難しい課題にも挑戦できます。'},{ic:'🖥',tx:'作業をまとめて進めるチャンスです。'},{ic:'✍️',tx:'文章を書くのにも向いています。'},{ic:'📌',tx:'重要な部分から先に終わらせましょう。'},{ic:'🔍',tx:'細かい確認も今のうちに。'},{ic:'🚀',tx:'流れに乗って進めましょう。'}],
+  h6: [{ic:'🎯',tx:'判断がしやすい時間です。決断するなら今。'},{ic:'🤝',tx:'人と話すのに向いています。'},{ic:'💼',tx:'会議や打ち合わせに良いタイミングです。'},{ic:'🌟',tx:'自信を持って動ける時間です。'},{ic:'📞',tx:'連絡ごとは今のうちに済ませましょう。'},{ic:'🧠',tx:'考えがまとまりやすいです。'},{ic:'📣',tx:'意見を伝えるのにも適しています。'},{ic:'🗂',tx:'整理や調整もスムーズに進みます。'},{ic:'🔑',tx:'大事な判断はここで。'},{ic:'🏆',tx:'成果につながりやすい時間です。'}],
+  h8: [{ic:'☕',tx:'少し疲れが出てきます。短く休みましょう。'},{ic:'👀',tx:'目を休ませると楽になります。'},{ic:'🚰',tx:'水分を忘れずに。'},{ic:'🪑',tx:'一度立ち上がるだけでもリフレッシュになります。'},{ic:'🍫',tx:'軽くエネルギー補給を。'},{ic:'🧘',tx:'深呼吸でリセットしましょう。'},{ic:'⏸',tx:'5分の休憩で集中が戻ります。'},{ic:'📵',tx:'少し画面から離れるのも大切です。'},{ic:'🚶',tx:'軽く歩くと頭がスッキリします。'},{ic:'🌿',tx:'無理せずペースを整えましょう。'}],
+  h10: [{ic:'😴',tx:'少し眠くなるのは自然です。'},{ic:'🛋',tx:'短い休憩で回復できます。'},{ic:'🌿',tx:'目を閉じるだけでも楽になります。'},{ic:'🚶',tx:'少し歩くと眠気が和らぎます。'},{ic:'☀️',tx:'光を浴びると目が覚めやすいです。'},{ic:'🧃',tx:'水分補給でスッキリします。'},{ic:'🍽',tx:'食後はゆっくりで大丈夫です。'},{ic:'🔄',tx:'軽い作業に切り替えましょう。'},{ic:'📉',tx:'集中が落ちるのは普通です。'},{ic:'🌈',tx:'無理せず整えましょう。'}],
+  h12: [{ic:'🌀',tx:'眠気のピークです。無理しないで。'},{ic:'🧊',tx:'顔を洗うとスッキリします。'},{ic:'🪟',tx:'換気で気分が変わります。'},{ic:'🏃',tx:'少し動くと目が覚めます。'},{ic:'🎧',tx:'音楽で気分転換もおすすめです。'},{ic:'🧘',tx:'深呼吸でリセットしましょう。'},{ic:'🍬',tx:'軽く甘いものも効果的です。'},{ic:'📵',tx:'一度画面から離れましょう。'},{ic:'🔁',tx:'単純作業に切り替えるのも手です。'},{ic:'🌱',tx:'ゆっくり戻せば大丈夫です。'}],
+  h14: [{ic:'🔄',tx:'少しずつ集中が戻ってきます。'},{ic:'📝',tx:'繰り返し作業に向いています。'},{ic:'🎧',tx:'音楽でリズムを作りましょう。'},{ic:'📦',tx:'細かい作業を片付けるチャンスです。'},{ic:'🧩',tx:'軽めのタスクを進めましょう。'},{ic:'📊',tx:'整理やまとめに向いています。'},{ic:'⏳',tx:'短い区切りで進めると楽です。'},{ic:'🚶',tx:'軽く動くとさらに調子が上がります。'},{ic:'🌈',tx:'あと少しの時間帯です。'},{ic:'📌',tx:'優先順位を見直しましょう。'}],
+  h16: [{ic:'🌆',tx:'体がよく動く時間です。'},{ic:'🏋',tx:'運動に向いています。'},{ic:'🌇',tx:'今日の振り返りをすると楽です。'},{ic:'🎮',tx:'少し息抜きもOKです。'},{ic:'🚶',tx:'体を動かすと気分が上がります。'},{ic:'📒',tx:'明日の準備を始めましょう。'},{ic:'🧠',tx:'頭もまだしっかり動いています。'},{ic:'📊',tx:'整理やまとめに最適です。'},{ic:'🌿',tx:'リズムよく過ごせます。'},{ic:'🏁',tx:'一日の締めに向かいましょう。'}],
+  h18: [{ic:'🌙',tx:'そろそろ落ち着く時間です。'},{ic:'📱',tx:'画面は少し暗めにしましょう。'},{ic:'🛁',tx:'お風呂でリラックスできます。'},{ic:'📵',tx:'スマホは控えめに。'},{ic:'🕯',tx:'明かりを落とすと眠りやすくなります。'},{ic:'📖',tx:'静かな時間を過ごしましょう。'},{ic:'🧘',tx:'ゆっくり深呼吸を。'},{ic:'🍵',tx:'温かい飲み物で落ち着きます。'},{ic:'🌌',tx:'体を休める準備です。'},{ic:'🛌',tx:'無理せずリラックスを。'}],
+  h20: [{ic:'💤',tx:'そろそろ休む時間です。'},{ic:'🌛',tx:'今日はよく頑張りました。'},{ic:'😮‍💨',tx:'疲れはしっかり取るのが大切です。'},{ic:'🌃',tx:'夜更かしはほどほどに。'},{ic:'🛌',tx:'早めに布団に入りましょう。'},{ic:'📵',tx:'スマホは置いて休みましょう。'},{ic:'🕯',tx:'明かりを落とすと眠りやすいです。'},{ic:'🧘',tx:'ゆっくり呼吸して落ち着きましょう。'},{ic:'🌙',tx:'体をしっかり休ませてください。'},{ic:'🌠',tx:'明日に備えてぐっすりと。'}]
 };
 const _tipsSeed=Math.random();
 function getTips(elMin){
@@ -975,19 +887,91 @@ function renderReport(){
   const tw=document.createElement('div');tw.className='rep-table-wrap';tw.innerHTML=`<div class="rep-table-title">日別ログ</div>`;
   days.forEach(d=>{const ds=fD(d);const isT=ds===todayStr;const ss=daySessMap[ds]||[];const dayTotal=dayTotals[days.indexOf(d)];const grp=document.createElement('div');grp.className='rep-day-group';grp.innerHTML=`<div class="rep-day-hd"><span class="rep-day-name">${DAY[d.getDay()]} ${d.getDate()}日${isT?' (今日)':''}</span>${dayTotal?`<span class="rep-day-total">${mHm(dayTotal)}</span>`:''}</div>`;if(ss.length){ss.sort((a,b)=>a.e-b.e).forEach(s=>{const dur=sessMin(s);grp.innerHTML+=`<div class="rep-sess-row"><span class="rep-cell">${fT(s.s)}</span><span class="rep-cell">→ ${fT(s.e)}</span><span class="rep-cell dur">${mHm(dur)}</span></div>`;});}else grp.innerHTML+=`<div class="rep-sess-row"><span class="rep-cell miss" style="grid-column:1/4">記録なし</span></div>`;tw.appendChild(grp);});c.appendChild(tw);
 }
+
+// ── CSV EXPORT (FIX: 正しいヘッダーと形式) ──
 function exportCSV(){
-  const sess=getSess();const hdr='date,bedtime,waketime,duration_min,duration_hm\n';const rows=sess.map(s=>{const dur=Math.round((s.e-s.s)/60000);return`${fD(s.s)},${fT(s.s)},${fT(s.e)},${dur},"${mHm(dur)}"`;}).join('\n');
-  const blob=new Blob(['\uFEFF'+hdr+rows],{type:'text/csv;charset=utf-8;'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`nemuroku_${fD(new Date())}.csv`;a.click();URL.revokeObjectURL(url);toast('📥 CSVをダウンロードしました');
+  const sess=getSess();
+  const hdr='date,bedtime,waketime,duration_min,duration_hm\n';
+  const rows=sess.map(s=>{
+    const dur=Math.round((s.e-s.s)/60000);
+    // dateは就寝日（bedtime基準）
+    return `${fD(s.s)},${fT(s.s)},${fT(s.e)},${dur},"${mHm(dur)}"`;
+  }).join('\n');
+  const blob=new Blob(['\uFEFF'+hdr+rows],{type:'text/csv;charset=utf-8;'});
+  const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`nemuroku_${fD(new Date())}.csv`;a.click();URL.revokeObjectURL(url);toast('📥 CSVをダウンロードしました');
 }
+
 function triggerCSVImport(){const input=document.getElementById('csvImportInput');input.value='';input.click();}
+
+// ── CSV IMPORT (FIX: 日付ずれバグ修正) ──
 function importCSV(input){
   const file=input.files[0];if(!file)return;const reader=new FileReader();
   reader.onload=e=>{
-    try{const text=e.target.result.replace(/^\uFEFF/,'');const lines=text.trim().split('\n');const header=lines[0].toLowerCase();if(!header.includes('bedtime')||!header.includes('waketime')){toast('⚠️ CSVのフォーマットが正しくありません');return;}let added=0;const existingTs=new Set(recs.map(r=>r.ts));
-    lines.slice(1).forEach(line=>{if(!line.trim())return;const cols=line.split(',').map(c=>c.replace(/^"|"$/g,'').trim());if(cols.length<3)return;const dateStr=cols[0],bedStr=cols[1],wakeStr=cols[2];if(!dateStr.match(/^\d{4}-\d{2}-\d{2}$/)||!bedStr.match(/^\d{2}:\d{2}$/)||!wakeStr.match(/^\d{2}:\d{2}$/))return;const[sy,sm,sd]=dateStr.split('-').map(Number);const[bh,bm]=bedStr.split(':').map(Number);const[wh,wm]=wakeStr.split(':').map(Number);const sleepDate=new Date(sy,sm-1,sd,bh,bm,0,0);let wakeDate;if(wh<bh||(wh===bh&&wm<bm)){wakeDate=new Date(sy,sm-1,sd+1,wh,wm,0,0);}else{wakeDate=new Date(sy,sm-1,sd,wh,wm,0,0);}const sts=sleepDate.getTime(),wts=wakeDate.getTime();if(existingTs.has(sts)||existingTs.has(wts))return;recs.push({id:sts,t:'sleep',ts:sts},{id:wts,t:'wake',ts:wts});existingTs.add(sts);existingTs.add(wts);added++;});
-    recs.sort((a,b)=>a.ts-b.ts);save();renderAll();toast(`📂 ${added}件のセッションをインポートしました`);}catch(err){toast('⚠️ インポートに失敗しました: '+err.message);}
-  };reader.readAsText(file);
+    try{
+      const text=e.target.result.replace(/^\uFEFF/,'');
+      const lines=text.trim().split(/\r?\n/);
+      const header=lines[0].toLowerCase();
+      if(!header.includes('bedtime')||!header.includes('waketime')){toast('⚠️ CSVのフォーマットが正しくありません');return;}
+      
+      // ヘッダー列のインデックスを動的に取得
+      const cols=header.split(',').map(c=>c.trim().replace(/^"|"$/g,''));
+      const dateIdx=cols.indexOf('date');
+      const bedIdx=cols.indexOf('bedtime');
+      const wakeIdx=cols.indexOf('waketime');
+      if(dateIdx<0||bedIdx<0||wakeIdx<0){toast('⚠️ 必要な列が見つかりません');return;}
+      
+      let added=0;
+      const existingTs=new Set(recs.map(r=>r.ts));
+      
+      lines.slice(1).forEach(line=>{
+        if(!line.trim())return;
+        // CSV列をクオート対応で分割
+        const parts=[];let cur='',inQ=false;
+        for(let i=0;i<line.length;i++){
+          if(line[i]==='"'){inQ=!inQ;}
+          else if(line[i]===','&&!inQ){parts.push(cur);cur='';}
+          else cur+=line[i];
+        }
+        parts.push(cur);
+        const getCol=idx=>parts[idx]?parts[idx].trim().replace(/^"|"$/g,''):'';
+        
+        const dateStr=getCol(dateIdx);
+        const bedStr=getCol(bedIdx);
+        const wakeStr=getCol(wakeIdx);
+        
+        if(!dateStr.match(/^\d{4}-\d{2}-\d{2}$/)||!bedStr.match(/^\d{2}:\d{2}$/)||!wakeStr.match(/^\d{2}:\d{2}$/))return;
+        
+        const [sy,sm,sd]=dateStr.split('-').map(Number);
+        const [bh,bm]=bedStr.split(':').map(Number);
+        const [wh,wm]=wakeStr.split(':').map(Number);
+        
+        // 就寝日時：dateの日に bedtime を適用
+        const sleepDate=new Date(sy,sm-1,sd,bh,bm,0,0);
+        
+        // 起床日時：就寝時刻より起床時刻が小さければ翌日
+        let wakeDate;
+        const bedTotalMin=bh*60+bm;
+        const wakeTotalMin=wh*60+wm;
+        if(wakeTotalMin<=bedTotalMin){
+          // 翌日起床
+          wakeDate=new Date(sy,sm-1,sd+1,wh,wm,0,0);
+        }else{
+          wakeDate=new Date(sy,sm-1,sd,wh,wm,0,0);
+        }
+        
+        const sts=sleepDate.getTime(),wts=wakeDate.getTime();
+        if(existingTs.has(sts)||existingTs.has(wts))return;
+        recs.push({id:sts,t:'sleep',ts:sts},{id:wts,t:'wake',ts:wts});
+        existingTs.add(sts);existingTs.add(wts);added++;
+      });
+      
+      recs.sort((a,b)=>a.ts-b.ts);save();renderAll();
+      toast(`📂 ${added}件のセッションをインポートしました`);
+    }catch(err){toast('⚠️ インポートに失敗しました: '+err.message);}
+  };
+  reader.readAsText(file);
 }
+
 function toggleNumpadLayout(){numpadLayout=numpadLayout==='phone'?'calc':'phone';localStorage.setItem('smn_np',numpadLayout);applyNumpadLayout();const lbl=document.getElementById('numpadLbl');if(lbl)lbl.textContent=numpadLayout==='phone'?'電話式 (1→9)':'電卓式 (7→1)';}
 function applyNumpadLayout(){const order=numpadLayout==='calc'?[7,8,9,4,5,6,1,2,3]:[1,2,3,4,5,6,7,8,9];document.querySelectorAll('.np').forEach(np=>{const keys=np.querySelectorAll('.nk:not(.sm):not(.z2)');if(keys.length!==9)return;order.forEach((n,i)=>{keys[i].textContent=String(n);});order.forEach((n,i)=>{const key=keys[i];const inNeru=np.closest('#drNeru')!==null;key.setAttribute('onclick',inNeru?`nrNk('${n}')`:`nk('${n}')`);});});}
 function renderMy(){
@@ -996,6 +980,7 @@ function renderMy(){
   const wsLbl=document.getElementById('weekStartLbl');if(wsLbl)wsLbl.textContent=weekStart===1?'月曜始まり':'日曜始まり';
   const slLbl=document.getElementById('sleepLatencyLbl');if(slLbl)slLbl.textContent=sleepLatency===0?'0分（即記録）':`${sleepLatency}分後`;
   const cv=document.getElementById('curVersion');if(cv)cv.textContent=CURRENT_VERSION;
+  renderAccentPicker();
   if(!s.length){document.getElementById('myAv2').textContent='—';document.getElementById('myBst').textContent='—';return;}
   const byWake=sessByWakeDate(s);const dayTots=Object.values(byWake).map(ss=>ss.reduce((a,x)=>a+sessMin(x),0));
   const avg=Math.round(dayTots.reduce((a,v)=>a+v,0)/dayTots.length);const best=Math.max(...dayTots);
@@ -1008,7 +993,22 @@ function openSleepLatencyDr(){
 }
 function toggleTheme(){const isDark=document.documentElement.getAttribute('data-theme')==='dark';const next=isDark?'light':'dark';document.documentElement.setAttribute('data-theme',next);document.getElementById('thBtn').textContent=next==='dark'?'🌙':'☀️';document.getElementById('thLbl').textContent=next==='dark'?'ダーク':'ライト';document.getElementById('togDk').classList.toggle('on',next==='dark');document.getElementById('metaTheme').content=next==='dark'?'#121212':'#fdfdfd';localStorage.setItem('smn_th',next);}
 function confirmClearAll(){showConfirm({icon:'⚠️',title:'全記録を削除',msg:'すべての記録を削除します。\nこの操作は取り消せません。',okLabel:'すべて削除',cb:()=>{recs=[];save();renderAll();toast('🗑 すべて削除しました');}});}
+
+// ── 友達に共有する ──
+function shareApp(){
+  const url='https://modurili.github.io/nemuroku/'; // 実際のURLに変更してください
+  const text='ねむろく - シンプルな睡眠記録アプリ';
+  if(navigator.share){
+    navigator.share({title:'ねむろく',text,url}).catch(()=>{});
+  }else{
+    navigator.clipboard.writeText(url)
+      .then(()=>toast('🔗 URLをコピーしました'))
+      .catch(()=>toast('⚠️ コピーできませんでした'));
+  }
+}
+
 const CHANGELOG=[
+  {v:'1.1.0',date:'2025-04-18',note:'アクセントカラー6色選択機能追加。睡眠グラフの色をテーマカラーに連動。CSVエクスポート/インポートの日付ずれバグ修正（インポートで列を動的に取得し、翌日起床を正しく処理）。記録一覧のページャーとFABボタンの重なり解消。手動追加時のトースト表示バグ修正（寝付くまでの時間を誤表示しない）。「友達に共有する」ボタンをマイページに追加。'},
   {v:'1.0.0',date:'2025-03-19',note:'正式リリース。これまでの開発版（v0.3.7まで）を統合し、安定版として公開。'},
   {v:'0.3.7',date:'2025-03-19',note:'フッターの黒モヤ解消。棒グラフの描画バグ修正。スワイプジェスチャー追加。記録一覧ページング追加。'},
   {v:'0.3.6',date:'2025-03-19',note:'セッションブロックをおはよう上・おやすみ下の順に変更。カレンダー週始まり設定追加。寝付くまでの時間設定追加。'},
@@ -1044,7 +1044,17 @@ window.addEventListener('appinstalled',()=>{document.getElementById('installBtn'
 })();
 function renderAll(){renderStatus();renderStats();renderCal();renderRec();renderMy();const ap=document.querySelector('.page.active');if(ap?.id==='pg-rep')renderReport();if(ap?.id==='pg-ver')renderVersionHistory();}
 function render(){renderAll();}
-(function init(){const th=localStorage.getItem('smn_th')||'dark';document.documentElement.setAttribute('data-theme',th);document.getElementById('thBtn').textContent=th==='dark'?'🌙':'☀️';document.getElementById('thLbl').textContent=th==='dark'?'ダーク':'ライト';document.getElementById('togDk').classList.toggle('on',th==='dark');document.getElementById('metaTheme').content=th==='dark'?'#121212':'#fdfdfd';applyNumpadLayout();renderProfile();render();setInterval(()=>{renderStatus();renderCal();},30000);})();
+(function init(){
+  const th=localStorage.getItem('smn_th')||'dark';
+  document.documentElement.setAttribute('data-theme',th);
+  document.getElementById('thBtn').textContent=th==='dark'?'🌙':'☀️';
+  document.getElementById('thLbl').textContent=th==='dark'?'ダーク':'ライト';
+  document.getElementById('togDk').classList.toggle('on',th==='dark');
+  document.getElementById('metaTheme').content=th==='dark'?'#121212':'#fdfdfd';
+  applyAccent(currentAccent, false);
+  applyNumpadLayout();renderProfile();render();
+  setInterval(()=>{renderStatus();renderCal();},30000);
+})();
 </script>
 </body>
 </html>
