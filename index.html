@@ -149,10 +149,10 @@ a{color:var(--accent);text-decoration:none;}
 .ab-tm{font-family:'DM Mono',monospace;font-size:9px;color:var(--text2);}
 /* RECORDS */
 #pg-rec{display:flex;flex-direction:column;height:100%;overflow:hidden;}
-.rl-wrap{flex:1;overflow-y:auto;padding:8px 14px 8px;-webkit-overflow-scrolling:touch;}
+.rl-wrap{flex:1;overflow-y:auto;padding:8px 14px 80px;-webkit-overflow-scrolling:touch;}
 .rl-wrap::-webkit-scrollbar{width:0;}
 /* Fixed pager above the FAB */
-.rec-pager{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;flex-shrink:0;border-top:1px solid var(--border);background:var(--bg);/* pager sits above content, FAB sits above pager via z-index */}
+.rec-pager{display:flex;align-items:center;justify-content:space-between;padding:6px 14px 6px 14px;flex-shrink:0;border-top:1px solid var(--border);background:var(--bg);min-height:52px;position:relative;}
 .rec-pager-info{font-family:'DM Mono',monospace;font-size:11px;color:var(--text2);}
 .rec-pager-btns{display:flex;gap:5px;align-items:center;}
 .rec-pg-btn{width:30px;height:30px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text2);transition:all .15s;font-family:'DM Mono',monospace;}
@@ -185,7 +185,7 @@ a{color:var(--accent);text-decoration:none;}
 .conn-dur-line{flex:1;height:1px;background:var(--border);}
 .orphan-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--rs);display:flex;align-items:center;gap:10px;padding:11px 13px;margin-bottom:8px;animation:popUp .2s cubic-bezier(.34,1.56,.64,1);}
 /* FAB — fixed position above pager */
-.fab{position:absolute;bottom:72px;right:16px;width:50px;height:50px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;box-shadow:0 4px 20px color-mix(in srgb,var(--accent) 45%,transparent);transition:all .2s;z-index:6;}
+.fab{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;box-shadow:0 3px 14px color-mix(in srgb,var(--accent) 45%,transparent);transition:all .2s;z-index:6;}
 .fab:active{transform:scale(.94);}
 .empty{text-align:center;padding:56px 24px;color:var(--text2);font-size:13px;line-height:1.8;}
 /* REPORT */
@@ -406,11 +406,11 @@ a{color:var(--accent);text-decoration:none;}
     <div class="page" id="pg-rec">
       <div class="pg-hd"><div class="pg-ti">記録一覧</div></div>
       <div class="rl-wrap"><div id="recL"></div></div>
-      <div class="rec-pager" id="recPager" style="display:none">
+      <div class="rec-pager" id="recPager">
         <span class="rec-pager-info" id="recPagerInfo"></span>
         <div class="rec-pager-btns" id="recPagerBtns"></div>
+        <button class="fab" onclick="openDr(null)">＋</button>
       </div>
-      <button class="fab" onclick="openDr(null)">＋</button>
     </div>
     <div class="page" id="pg-rep">
       <div class="rep-week-nav">
@@ -847,7 +847,7 @@ function sessBlockHTML(s){
 }
 function renderRec(){
   const list=document.getElementById('recL');const pager=document.getElementById('recPager');const pagerInfo=document.getElementById('recPagerInfo');const pagerBtns=document.getElementById('recPagerBtns');
-  if(!recs.length){list.innerHTML='<div class="empty">記録がありません<br><br>右下の ＋ から追加できます</div>';if(pager)pager.style.display='none';return;}
+  if(!recs.length){list.innerHTML='<div class="empty">記録がありません<br><br>右の ＋ から追加できます</div>';if(pagerInfo)pagerInfo.textContent='';if(pagerBtns)pagerBtns.innerHTML='';return;}
   const items=buildRecItems();const totalPages=Math.ceil(items.length/REC_PER_PAGE);recPage=Math.max(0,Math.min(recPage,totalPages-1));
   const start=recPage*REC_PER_PAGE;const pageItems=items.slice(start,start+REC_PER_PAGE);
   list.innerHTML='';let lastDate='';
@@ -858,7 +858,7 @@ function renderRec(){
     else{const r=item.r;const el=document.createElement('div');el.className='orphan-item';el.innerHTML=`<div class="sdot orphan"></div><div class="sinfo"><div class="stype">${r.t==='sleep'?'<svg width=\'10\' height=\'10\' viewBox=\'0 0 24 24\' fill=\'currentColor\' style=\'vertical-align:middle;margin-right:3px\'><path d=\'M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z\'/></svg> おやすみ（未ペア）':'<svg width=\'10\' height=\'10\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'currentColor\' stroke-width=\'2.5\'><circle cx=\'12\' cy=\'12\' r=\'4\' fill=\'currentColor\' stroke=\'none\'/><line x1=\'12\' y1=\'1\' x2=\'12\' y2=\'3\'/><line x1=\'12\' y1=\'21\' x2=\'12\' y2=\'23\'/></svg> おはよう（未ペア）'}</div><div class="stime">${fT(new Date(r.ts))}</div></div><div class="sac"><button class="sib ed" onclick="openDr(${r.id})"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5z"/></svg></button><button class="sib dl" onclick="delRec(${r.id})"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>`;list.appendChild(el);}
   });
   document.getElementById('recL').parentElement.scrollTop=0;
-  if(totalPages<=1){if(pager)pager.style.display='none';return;}if(pager)pager.style.display='flex';
+  if(totalPages<=1){if(pagerInfo)pagerInfo.textContent='';if(pagerBtns)pagerBtns.innerHTML='';return;}
   if(pagerInfo)pagerInfo.textContent=`${start+1}–${Math.min(start+REC_PER_PAGE,items.length)} / ${items.length}件`;
   if(pagerBtns){pagerBtns.innerHTML='';const prev=document.createElement('button');prev.className='rec-pg-btn';prev.textContent='‹';prev.disabled=recPage===0;prev.onclick=()=>{recPage--;renderRec();};pagerBtns.appendChild(prev);const maxBtns=5;let pStart=Math.max(0,recPage-Math.floor(maxBtns/2));let pEnd=Math.min(totalPages-1,pStart+maxBtns-1);if(pEnd-pStart<maxBtns-1)pStart=Math.max(0,pEnd-maxBtns+1);for(let p=pStart;p<=pEnd;p++){const btn=document.createElement('button');btn.className='rec-pg-btn'+(p===recPage?' cur':'');btn.textContent=String(p+1);const pp=p;btn.onclick=()=>{recPage=pp;renderRec();};pagerBtns.appendChild(btn);}const next=document.createElement('button');next.className='rec-pg-btn';next.textContent='›';next.disabled=recPage===totalPages-1;next.onclick=()=>{recPage++;renderRec();};pagerBtns.appendChild(next);}
 }
@@ -903,80 +903,65 @@ function renderReport(){
 // ── CSV EXPORT (FIX: 正しいヘッダーと形式) ──
 function exportCSV(){
   const sess=getSess();
-  const hdr='date,bedtime,waketime,duration_min,duration_hm\n';
-  const rows=sess.map(s=>{
-    const dur=Math.round((s.e-s.s)/60000);
-    // dateは就寝日（bedtime基準）
-    return `${fD(s.s)},${fT(s.s)},${fT(s.e)},${dur},"${mHm(dur)}"`;
-  }).join('\n');
-  const blob=new Blob(['\uFEFF'+hdr+rows],{type:'text/csv;charset=utf-8;'});
+  // 新形式: date,time  奇数行=おやすみ 偶数行=おはよう
+  const hdr='date,time\n';
+  const rows=[];
+  sess.forEach(s=>{
+    rows.push(`${fD(s.s)},${fT(s.s)}`); // おやすみ（奇数行）
+    rows.push(`${fD(s.e)},${fT(s.e)}`); // おはよう（偶数行）
+  });
+  const blob=new Blob(['\uFEFF'+hdr+rows.join('\n')],{type:'text/csv;charset=utf-8;'});
   const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`nemuroku_${fD(new Date())}.csv`;a.click();URL.revokeObjectURL(url);toast('CSVをダウンロードしました');
 }
 
 function triggerCSVImport(){const input=document.getElementById('csvImportInput');input.value='';input.click();}
 
-// ── CSV IMPORT (FIX: 日付ずれバグ修正) ──
+// ── CSV IMPORT: 新形式 date,time (奇数行=おやすみ, 偶数行=おはよう) ──
 function importCSV(input){
   const file=input.files[0];if(!file)return;const reader=new FileReader();
   reader.onload=e=>{
     try{
       const text=e.target.result.replace(/^\uFEFF/,'');
       const lines=text.trim().split(/\r?\n/);
-      const header=lines[0].toLowerCase();
-      if(!header.includes('bedtime')||!header.includes('waketime')){toast('CSVのフォーマットが正しくありません');return;}
-      
-      // ヘッダー列のインデックスを動的に取得
+      if(!lines.length){toast('CSVが空です');return;}
+      const header=lines[0].toLowerCase().replace(/\s/g,'');
+      if(!header.includes('date')||!header.includes('time')){toast('CSVのフォーマットが正しくありません');return;}
+      // date,time 列インデックス取得
       const cols=header.split(',').map(c=>c.trim().replace(/^"|"$/g,''));
       const dateIdx=cols.indexOf('date');
-      const bedIdx=cols.indexOf('bedtime');
-      const wakeIdx=cols.indexOf('waketime');
-      if(dateIdx<0||bedIdx<0||wakeIdx<0){toast('必要な列が見つかりません');return;}
-      
+      const timeIdx=cols.indexOf('time');
+      if(dateIdx<0||timeIdx<0){toast('date列またはtime列が見つかりません');return;}
+      // データ行を取得
+      const dataLines=lines.slice(1).filter(l=>l.trim());
       let added=0;
       const existingTs=new Set(recs.map(r=>r.ts));
-      
-      lines.slice(1).forEach(line=>{
-        if(!line.trim())return;
-        // CSV列をクオート対応で分割
-        const parts=[];let cur='',inQ=false;
-        for(let i=0;i<line.length;i++){
-          if(line[i]==='"'){inQ=!inQ;}
-          else if(line[i]===','&&!inQ){parts.push(cur);cur='';}
-          else cur+=line[i];
-        }
-        parts.push(cur);
-        const getCol=idx=>parts[idx]?parts[idx].trim().replace(/^"|"$/g,''):'';
-        
-        const dateStr=getCol(dateIdx);
-        const bedStr=getCol(bedIdx);
-        const wakeStr=getCol(wakeIdx);
-        
-        if(!dateStr.match(/^\d{4}-\d{2}-\d{2}$/)||!bedStr.match(/^\d{2}:\d{2}$/)||!wakeStr.match(/^\d{2}:\d{2}$/))return;
-        
-        const [sy,sm,sd]=dateStr.split('-').map(Number);
-        const [bh,bm]=bedStr.split(':').map(Number);
-        const [wh,wm]=wakeStr.split(':').map(Number);
-        
-        // 就寝日時：dateの日に bedtime を適用
-        const sleepDate=new Date(sy,sm-1,sd,bh,bm,0,0);
-        
-        // 起床日時：就寝時刻より起床時刻が小さければ翌日
-        let wakeDate;
-        const bedTotalMin=bh*60+bm;
-        const wakeTotalMin=wh*60+wm;
-        if(wakeTotalMin<=bedTotalMin){
-          // 翌日起床
-          wakeDate=new Date(sy,sm-1,sd+1,wh,wm,0,0);
-        }else{
-          wakeDate=new Date(sy,sm-1,sd,wh,wm,0,0);
-        }
-        
+      // 奇数インデックス=おやすみ, 偶数インデックス=おはよう でペア処理
+      for(let i=0;i<dataLines.length-1;i+=2){
+        const parseRow=line=>{
+          const parts=line.split(',').map(c=>c.trim().replace(/^"|"$/g,''));
+          const dateStr=parts[dateIdx]||'';
+          const timeStr=parts[timeIdx]||'';
+          if(!dateStr.match(/^\d{4}-\d{2}-\d{2}$/))return null;
+          // H:MM または HH:MM 両対応
+          const tm=timeStr.match(/^(\d{1,2}):(\d{2})$/);
+          if(!tm)return null;
+          const [,h,m]=tm;
+          const [sy,sm,sd]=dateStr.split('-').map(Number);
+          return{y:sy,mo:sm,d:sd,h:parseInt(h),m:parseInt(m)};
+        };
+        const sl=parseRow(dataLines[i]);
+        const wk=parseRow(dataLines[i+1]);
+        if(!sl||!wk)continue;
+        const sleepDate=new Date(sl.y,sl.mo-1,sl.d,sl.h,sl.m,0,0);
+        // 起床日時: CSVにある日付をそのまま使う
+        const wakeDate=new Date(wk.y,wk.mo-1,wk.d,wk.h,wk.m,0,0);
+        // 起床が就寝より前の場合は異常データとしてスキップ
+        if(wakeDate<=sleepDate)return;
         const sts=sleepDate.getTime(),wts=wakeDate.getTime();
-        if(existingTs.has(sts)||existingTs.has(wts))return;
+        if(existingTs.has(sts)||existingTs.has(wts))continue;
         recs.push({id:sts,t:'sleep',ts:sts},{id:wts,t:'wake',ts:wts});
         existingTs.add(sts);existingTs.add(wts);added++;
-      });
-      
+      }
       recs.sort((a,b)=>a.ts-b.ts);save();renderAll();
       toast(`${added}件インポートしました`);
     }catch(err){toast('インポートに失敗しました: '+err.message);}
@@ -1020,7 +1005,8 @@ function shareApp(){
 }
 
 const CHANGELOG=[
-  {v:'1.3.0',date:'2025-04-19',note:'テーマ設定行を1行に統合。アクセントカラーが反映されていた箇所（睡眠時間バッジ・FABシャドウ・アバター選択・ページャー等）をすべてCSS変数化。ライトモードの就寝/起床ドット色を改善。'},
+  {v:'1.4.0',date:'2025-04-19',note:'CSV形式を date,time の2列（奇数行=就寝・偶数行=起床）にシンプル化。エクスポート・インポート両対応。記録タブのページャーUIとFABボタンの表示崩れを修正。'},
+  {v:'1.3.0',date:'2025-04-19',note:'テーマ設定行を1行に統合。アクセント色のCSS変数化。ライトモードのドット色改善。'},
   {v:'1.2.0',date:'2025-04-19',note:'絵文字をすべてSVGシルエットアイコンに統一。ダークモードトグルの背景色をアクセントカラーに連動。共有URLを正式化。'},
   {v:'1.1.0',date:'2025-04-18',note:'アクセントカラー6色選択。CSVインポートバグ修正。FAB・ページャー重なり解消。「友達に共有する」追加。'},
   {v:'1.0.0',date:'2025-03-19',note:'正式リリース。これまでの開発版（v0.3.7まで）を統合し、安定版として公開。'},
